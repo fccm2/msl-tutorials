@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>xmgk - tutorial - ten</title>
+<title>xmgk - tutorial - eleven</title>
 <style>
 <!--
 /*
@@ -18,41 +18,39 @@ pre { border:1px solid #100401; margin-right:20%; }
 .Type { color:#47cf7f; }
 .PreProc { color:#2fa7df; }
 .Constant { color:#ff40ff; }
+table, tr, td { border:0px; }
 -->
 </style>
 </head>
 <body>
-<h1>xmgk - tutorial - ten</h1>
+<h1>xmgk - tutorial - eleven</h1>
 
-<p><code>img-25.xml</code></p>
+<p><code>img-27.xml</code></p>
 
 <pre>
-$ cat img-25.sh
-./pppo7o.opt  0 img-25.xml &gt; img-25.0.xml
-./pppo7o.opt 10 img-25.xml &gt; img-25.10.xml
-./pppo7o.opt 50 img-25.xml &gt; img-25.50.xml
-
-./xmgk.opt img-25.0.xml  &amp;&amp; cp img-27c.png img-27.0.png
-./xmgk.opt img-25.10.xml &amp;&amp; cp img-27c.png img-27.10.png
-./xmgk.opt img-25.50.xml &amp;&amp; cp img-27c.png img-27.50.png
-
-feh img-27.0.png img-27.10.png img-27.50.png
-
-convert -delay 50 -loop 0 img-27.0.png img-27.10.png img-27.50.png img-27.gif
+./pppo0.opt img-27.xml &gt; img-27.w.xml
+./pppo0.opt img-27.xml &gt; img-27.t.xml
 </pre>
 
-<p><code></code></p>
 
 <pre>
 <span class="Identifier">&lt;</span><span class="Identifier">msl</span><span class="Identifier">&gt;</span>
+  <span class="Comment">&lt;!</span><span class="Comment">--</span>
+<span class="Comment">  &lt;set val='COL_STROKE' of='50,110,70' /&gt;</span>
+<span class="Comment">  &lt;set val='COL_BG1' of='195,255,185' /&gt;</span>
+<span class="Comment">  &lt;set val='COL_BG' of='195,254,215' /&gt;</span>
+<span class="Comment">  --</span><span class="Comment">&gt;</span>
+  <span class="Identifier">&lt;</span><span class="Identifier">set</span><span class="Identifier"> </span><span class="Type">val</span>=<span class="Constant">'COL_STROKE'</span><span class="Identifier"> </span><span class="Type">of</span>=<span class="Constant">'50,70,110'</span><span class="Identifier"> /&gt;</span>
+  <span class="Identifier">&lt;</span><span class="Identifier">set</span><span class="Identifier"> </span><span class="Type">val</span>=<span class="Constant">'COL_BG1'</span><span class="Identifier"> </span><span class="Type">of</span>=<span class="Constant">'195,185,255'</span><span class="Identifier"> /&gt;</span>
+  <span class="Identifier">&lt;</span><span class="Identifier">set</span><span class="Identifier"> </span><span class="Type">val</span>=<span class="Constant">'COL_BG'</span><span class="Identifier"> </span><span class="Type">of</span>=<span class="Constant">'195,215,254'</span><span class="Identifier"> /&gt;</span>
   <span class="Identifier">&lt;</span><span class="Identifier">image</span><span class="Identifier">&gt;</span>
     <span class="Identifier">&lt;</span><span class="Identifier">merge</span><span class="Identifier">&gt;</span>
       <span class="Identifier">&lt;</span><span class="Identifier">layer</span><span class="Identifier">&gt;</span>
-        <span class="Identifier">&lt;</span><span class="Identifier">new</span><span class="Identifier"> </span><span class="Type">w</span>=<span class="Constant">'190'</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'230'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'195,254,215'</span><span class="Identifier"> /&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">new</span><span class="Identifier"> </span><span class="Type">w</span>=<span class="Constant">'190'</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'230'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'%[COL_BG]'</span><span class="Identifier"> /&gt;</span>
       <span class="Identifier">&lt;/</span><span class="Identifier">layer</span><span class="Identifier">&gt;</span>
       <span class="Identifier">&lt;</span><span class="Identifier">layer</span><span class="Identifier"> </span><span class="Type">compose</span>=<span class="Constant">'multiply'</span><span class="Identifier">&gt;</span>
         <span class="Identifier">&lt;</span><span class="Identifier">new</span><span class="Identifier"> </span><span class="Type">w</span>=<span class="Constant">'190'</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'230'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'255,255,255'</span><span class="Identifier"> /&gt;</span>
-        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'relative'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'195,255,185'</span><span class="Identifier">&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'relative'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'%[COL_BG1]'</span><span class="Identifier">&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">move_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'55 25'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'29 2'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'31 41'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'-2 30'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'-21 43'</span><span class="Identifier"> /&gt;</span>
@@ -61,47 +59,47 @@ convert -delay 50 -loop 0 img-27.0.png img-27.10.png img-27.50.png img-27.gif
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'-1 -39'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'17 -45'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">close_path</span><span class="Identifier"> /&gt;</span>
         <span class="Identifier">&lt;/</span><span class="Identifier">path</span><span class="Identifier">&gt;</span>
-        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'195,255,185'</span><span class="Identifier">&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'%[COL_BG1]'</span><span class="Identifier">&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">move_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'190 170'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">line_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'190 230'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">line_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'157 230'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'157 187'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'190 170'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">close_path</span><span class="Identifier"> /&gt;</span>
         <span class="Identifier">&lt;/</span><span class="Identifier">path</span><span class="Identifier">&gt;</span>
-        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'195,255,185'</span><span class="Identifier">&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'%[COL_BG1]'</span><span class="Identifier">&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">move_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'53 230'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'59 216'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'105 216'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'113 216'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'117 230'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">close_path</span><span class="Identifier"> /&gt;</span>
         <span class="Identifier">&lt;/</span><span class="Identifier">path</span><span class="Identifier">&gt;</span>
-        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'195,255,185'</span><span class="Identifier">&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'%[COL_BG1]'</span><span class="Identifier">&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">move_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'147 0'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'154 13'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'190 14'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">move_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'147 0'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">close_path</span><span class="Identifier"> /&gt;</span>
         <span class="Identifier">&lt;/</span><span class="Identifier">path</span><span class="Identifier">&gt;</span>
-        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'195,255,185'</span><span class="Identifier">&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'%[COL_BG1]'</span><span class="Identifier">&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">move_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'190 68'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'161 70'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'157 78'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'159 92'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'190 90'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">line_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'190 68'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">close_path</span><span class="Identifier"> /&gt;</span>
         <span class="Identifier">&lt;/</span><span class="Identifier">path</span><span class="Identifier">&gt;</span>
-        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'195,255,185'</span><span class="Identifier">&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'%[COL_BG1]'</span><span class="Identifier">&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">move_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'0 175'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'19 176'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'21 184'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'19 189'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'0 189'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">line_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'0 175'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">close_path</span><span class="Identifier"> /&gt;</span>
         <span class="Identifier">&lt;/</span><span class="Identifier">path</span><span class="Identifier">&gt;</span>
-        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'195,255,185'</span><span class="Identifier">&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'%[COL_BG1]'</span><span class="Identifier">&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">move_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'43 0'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'41 13'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'0 17'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">line_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'0 0'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">line_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'43 0'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">close_path</span><span class="Identifier"> /&gt;</span>
         <span class="Identifier">&lt;/</span><span class="Identifier">path</span><span class="Identifier">&gt;</span>
-        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'195,255,185'</span><span class="Identifier">&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'%[COL_BG1]'</span><span class="Identifier">&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">move_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'85 145'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'106 146'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'109 155'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'108 161'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'89 163'</span><span class="Identifier"> /&gt;</span>
@@ -112,7 +110,7 @@ convert -delay 50 -loop 0 img-27.0.png img-27.10.png img-27.50.png img-27.gif
       <span class="Identifier">&lt;/</span><span class="Identifier">layer</span><span class="Identifier">&gt;</span>
       <span class="Identifier">&lt;</span><span class="Identifier">layer</span><span class="Identifier"> </span><span class="Type">compose</span>=<span class="Constant">'multiply'</span><span class="Identifier">&gt;</span>
         <span class="Identifier">&lt;</span><span class="Identifier">new</span><span class="Identifier"> </span><span class="Type">w</span>=<span class="Constant">'190'</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'230'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'255,255,255'</span><span class="Identifier"> /&gt;</span>
-        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'relative'</span><span class="Identifier"> </span><span class="Type">rgb_stroke</span>=<span class="Constant">'50,110,70'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'2.8'</span><span class="Identifier">&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'relative'</span><span class="Identifier"> </span><span class="Type">rgb_stroke</span>=<span class="Constant">'%[COL_STROKE]'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'2.8'</span><span class="Identifier">&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">move_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'51 29'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'29 2'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'31 41'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'-2 30'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'-21 43'</span><span class="Identifier"> /&gt;</span>
@@ -120,34 +118,34 @@ convert -delay 50 -loop 0 img-27.0.png img-27.10.png img-27.50.png img-27.gif
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'-20 -2'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'-21 -41'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'-1 -39'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'13 -39'</span><span class="Identifier"> /&gt;</span>
         <span class="Identifier">&lt;/</span><span class="Identifier">path</span><span class="Identifier">&gt;</span>
-        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb_stroke</span>=<span class="Constant">'50,110,70'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'2.8'</span><span class="Identifier">&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb_stroke</span>=<span class="Constant">'%[COL_STROKE]'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'2.8'</span><span class="Identifier">&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">move_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'149 230'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'155 187'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'187 171'</span><span class="Identifier"> /&gt;</span>
         <span class="Identifier">&lt;/</span><span class="Identifier">path</span><span class="Identifier">&gt;</span>
-        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb_stroke</span>=<span class="Constant">'50,110,70'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'2.8'</span><span class="Identifier">&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb_stroke</span>=<span class="Constant">'%[COL_STROKE]'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'2.8'</span><span class="Identifier">&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">move_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'47 230'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'52 216'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'99 216'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'107 216'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'111 230'</span><span class="Identifier"> /&gt;</span>
         <span class="Identifier">&lt;/</span><span class="Identifier">path</span><span class="Identifier">&gt;</span>
-        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb_stroke</span>=<span class="Constant">'50,110,70'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'2.8'</span><span class="Identifier">&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb_stroke</span>=<span class="Constant">'%[COL_STROKE]'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'2.8'</span><span class="Identifier">&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">move_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'147 0'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'154 13'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'189 14'</span><span class="Identifier"> /&gt;</span>
         <span class="Identifier">&lt;/</span><span class="Identifier">path</span><span class="Identifier">&gt;</span>
-        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb_stroke</span>=<span class="Constant">'50,110,70'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'2.8'</span><span class="Identifier">&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb_stroke</span>=<span class="Constant">'%[COL_STROKE]'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'2.8'</span><span class="Identifier">&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">move_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'190 63'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'161 65'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'157 73'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'159 87'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'190 85'</span><span class="Identifier"> /&gt;</span>
         <span class="Identifier">&lt;/</span><span class="Identifier">path</span><span class="Identifier">&gt;</span>
-        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb_stroke</span>=<span class="Constant">'50,110,70'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'2.8'</span><span class="Identifier">&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb_stroke</span>=<span class="Constant">'%[COL_STROKE]'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'2.8'</span><span class="Identifier">&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">move_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'0 170'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'19 171'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'21 179'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'19 184'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'0 184'</span><span class="Identifier"> /&gt;</span>
         <span class="Identifier">&lt;/</span><span class="Identifier">path</span><span class="Identifier">&gt;</span>
-        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb_stroke</span>=<span class="Constant">'50,110,70'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'2.8'</span><span class="Identifier">&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb_stroke</span>=<span class="Constant">'%[COL_STROKE]'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'2.8'</span><span class="Identifier">&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">move_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'43 0'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'41 13'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'0 17'</span><span class="Identifier"> /&gt;</span>
         <span class="Identifier">&lt;/</span><span class="Identifier">path</span><span class="Identifier">&gt;</span>
-        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb_stroke</span>=<span class="Constant">'50,110,70'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'2.8'</span><span class="Identifier">&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'absolute'</span><span class="Identifier"> </span><span class="Type">rgb_stroke</span>=<span class="Constant">'%[COL_STROKE]'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'2.8'</span><span class="Identifier">&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">move_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'83 143'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'104 144'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'107 153'</span><span class="Identifier"> /&gt;</span>
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'106 159'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'87 161'</span><span class="Identifier"> /&gt;</span>
@@ -155,39 +153,17 @@ convert -delay 50 -loop 0 img-27.0.png img-27.10.png img-27.50.png img-27.gif
           <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'71 145'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'80 144'</span><span class="Identifier"> /&gt;</span>
         <span class="Identifier">&lt;/</span><span class="Identifier">path</span><span class="Identifier">&gt;</span>
       <span class="Identifier">&lt;/</span><span class="Identifier">layer</span><span class="Identifier">&gt;</span>
-      <span class="Identifier">&lt;</span><span class="Identifier">layer</span><span class="Identifier"> </span><span class="Type">compose</span>=<span class="Constant">'multiply'</span><span class="Identifier">&gt;</span>
-        <span class="Identifier">&lt;</span><span class="Identifier">new</span><span class="Identifier"> </span><span class="Type">w</span>=<span class="Constant">'190'</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'230'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'255,255,255'</span><span class="Identifier"> /&gt;</span>
-        <span class="Comment">&lt;!</span><span class="Comment">--</span>
-<span class="Comment">        &lt;draw_text txt=&quot;goyave&quot; pointsize=&quot;23:26!0-170&quot; pos=&quot;45,184&quot; font='./generic.ttf' rgb='0,0,0' /&gt;</span>
-<span class="Comment">        --</span><span class="Comment">&gt;</span>
-        <span class="Identifier">&lt;</span><span class="Identifier">draw_text</span><span class="Identifier"> </span><span class="Type">txt</span>=<span class="Constant">&quot;goyave&quot;</span><span class="Identifier"> </span><span class="Type">pointsize</span>=<span class="Constant">&quot;23&quot;</span><span class="Identifier"> </span><span class="Type">pos</span>=<span class="Constant">&quot;45,184:155,184!0-170&quot;</span><span class="Identifier"> </span><span class="Type">font</span>=<span class="Constant">'./generic.ttf'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'0,0,0'</span><span class="Identifier"> /&gt;</span>
-      <span class="Identifier">&lt;/</span><span class="Identifier">layer</span><span class="Identifier">&gt;</span>
     <span class="Identifier">&lt;/</span><span class="Identifier">merge</span><span class="Identifier">&gt;</span>
     <span class="Identifier">&lt;</span><span class="Identifier">display</span><span class="Identifier"> /&gt;</span>
-    <span class="Identifier">&lt;</span><span class="Identifier">write</span><span class="Identifier"> </span><span class="Type">filename</span>=<span class="Constant">'img-27c.png'</span><span class="Identifier"> /&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">write</span><span class="Identifier"> </span><span class="Type">filename</span>=<span class="Constant">'img-29a.png'</span><span class="Identifier"> /&gt;</span>
   <span class="Identifier">&lt;/</span><span class="Identifier">image</span><span class="Identifier">&gt;</span>
 <span class="Identifier">&lt;/</span><span class="Identifier">msl</span><span class="Identifier">&gt;</span>
 </pre>
 
-<p>linear expension from <code>'23'</code> to <code>'26'</code>,<br />
-spaning on the time, from <code>'0'</code> until <code>'170'</code></p>
+<table><tr><td><img src='./ressources/img-29w.png' /></td>
+<td><img src='./ressources/img-29t.png' /></td></tr></table>
 
-<p><code>"23:26!0-170"</code></p>
-
-<p><span class="Type">pointsize</span>=<span class="Constant">&quot;23&quot;</span></p>
-
-<p>for <code>t='0'</code></p>
-
-<p><img src='./ressources/img-27.gif' /></p>
-
-<p><span class="Type">pos</span>=<span class="Constant">&quot;45,184:155,184!0-170&quot;</span></p>
-
-<p>for <code>t='0'</code>, <span class="Type">pos</span>=<span class="Constant">&quot;45,184&quot;</span></p>
-
-<p>for <code>t='170'</code>, <span class="Type">pos</span>=<span class="Constant">&quot;155,184</span></p>
-
-<p><a href="./tut-xmgk-7.html">&lt;-</a> /
-<a href="./tut-xmgk-11.html">-&gt;</a></p>
+<p><a href="./tut-xmgk-10.html">&lt;-</a> / -&gt;</p>
 
 </body>
 </html>
