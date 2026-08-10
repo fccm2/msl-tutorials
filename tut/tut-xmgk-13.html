@@ -1,0 +1,109 @@
+<html>
+<head>
+<title>xmgk - tutorial - random</title>
+<style>
+<!--
+/*
+pre { color:#000000; background-color:#ffffff; }
+body { font-family:monospace; color:#000000; background-color:#ffffff; }
+.Type { color:#008000; }
+.Identifier { color:#008080; }
+.Constant { color:#c00000; }
+*/
+body { color:#000; background-color:#fff; }
+code { border:1px solid #000; }
+pre { border:1px solid #100401; margin-right:20%; }
+.Special { color:#cfa796; }
+.Statement { color:#d0c010; }
+.Type { color:#47cf7f; }
+.PreProc { color:#2fa7df; }
+.Constant { color:#ff40ff; }
+table, tr, td { border:0px; }
+-->
+</style>
+</head>
+<body>
+<h1>xmgk - tutorial - random</h1>
+
+<p>random values</p>
+
+<p><code>img-35.xml</code></p>
+
+<p>you can start from a very simple base like this</p>
+
+<pre>
+<span class="Identifier">&lt;</span><span class="Identifier">msl</span><span class="Identifier">&gt;</span>
+  <span class="Identifier">&lt;</span><span class="Identifier">image</span><span class="Identifier">&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">new</span><span class="Identifier"> </span><span class="Type">w</span>=<span class="Constant">'700'</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'110'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'15,31,127'</span><span class="Identifier"> /&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">draw_rectangle</span><span class="Identifier"> </span><span class="Type">pos</span>=<span class="Constant">'10,20'</span><span class="Identifier"> </span><span class="Type">dims</span>=<span class="Constant">'20,20'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'0,0,255'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'4.0'</span><span class="Identifier"> /&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">write</span><span class="Identifier"> </span><span class="Type">filename</span>=<span class="Constant">'rectangle-05.png'</span><span class="Identifier"> /&gt;</span>
+  <span class="Identifier">&lt;/</span><span class="Identifier">image</span><span class="Identifier">&gt;</span>
+<span class="Identifier">&lt;/</span><span class="Identifier">msl</span><span class="Identifier">&gt;</span>
+</pre>
+
+<p><img src='./ressources/rectangle-05.png' /></p>
+
+<p>then you would like to position the small square at random positions</p>
+
+<pre>
+<span class="Identifier">&lt;</span><span class="Identifier">msl</span><span class="Identifier">&gt;</span>
+  <span class="Identifier">&lt;</span><span class="Identifier">image</span><span class="Identifier">&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">new</span><span class="Identifier"> </span><span class="Type">w</span>=<span class="Constant">'700'</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'110'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'15,31,127'</span><span class="Identifier"> /&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">draw_rectangle</span><span class="Identifier"> </span><span class="Type">pos</span>=<span class="Constant">'10:670,10:85'</span><span class="Identifier"> </span><span class="Type">dims</span>=<span class="Constant">'20,20'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'0,0,255'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'4.0'</span><span class="Identifier"> /&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">display</span><span class="Identifier"> /&gt;</span>
+  <span class="Identifier">&lt;/</span><span class="Identifier">image</span><span class="Identifier">&gt;</span>
+<span class="Identifier">&lt;/</span><span class="Identifier">msl</span><span class="Identifier">&gt;</span>
+</pre>
+
+<p>the preprocessor <code>pppr</code> will create <code>x</code> value
+in the range <code>10:670</code></p>
+
+<p>and <code>y</code> values in the range <code>10:85</code></p>
+
+<pre>./pppr.opt  img-35.xml</pre>
+
+<p>as for example</p>
+
+<pre>
+<span class="Identifier">&lt;</span><span class="Identifier">msl</span><span class="Identifier">&gt;</span>
+<span class="Identifier">&lt;</span><span class="Identifier">image</span><span class="Identifier">&gt;</span>
+<span class="Identifier">&lt;</span><span class="Identifier">new</span><span class="Identifier"> </span><span class="Type">w</span>=<span class="Constant">&quot;700&quot;</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">&quot;110&quot;</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">&quot;15,31,127&quot;</span><span class="Identifier"> /&gt;</span>
+<span class="Identifier">&lt;</span><span class="Identifier">draw_rectangle</span><span class="Identifier"> </span><span class="Type">pos</span>=<span class="Constant">&quot;125,58&quot;</span><span class="Identifier"> </span><span class="Type">dims</span>=<span class="Constant">&quot;20,20&quot;</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">&quot;0,0,255&quot;</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">&quot;4.0&quot;</span><span class="Identifier"> /&gt;</span>
+<span class="Identifier">&lt;</span><span class="Identifier">display</span><span class="Identifier"> /&gt;</span>
+<span class="Identifier">&lt;/</span><span class="Identifier">image</span><span class="Identifier">&gt;</span>
+<span class="Identifier">&lt;/</span><span class="Identifier">msl</span><span class="Identifier">&gt;</span>
+</pre>
+
+<p>complete process</p>
+
+<pre>
+$ pppr img-35.xml &gt; img-35.1.xml
+$ xmgk img-35.1.xml
+</pre>
+
+<pre>
+$ pppo1.opt img-35.xml &gt; img-35.1.xml
+$ pppr.opt img-35.1.xml &gt; img-35.r.xml
+</pre>
+
+<p>with a <code>for</code> loop we can create this nice effect</p>
+
+<pre>
+<span class="Identifier">&lt;</span><span class="Identifier">msl</span><span class="Identifier">&gt;</span>
+  <span class="Identifier">&lt;</span><span class="Identifier">image</span><span class="Identifier">&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">new</span><span class="Identifier"> </span><span class="Type">w</span>=<span class="Constant">'700'</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'110'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'15,31,127'</span><span class="Identifier"> /&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">for</span><span class="Identifier"> </span><span class="Type">rnt</span>=<span class="Constant">'55'</span><span class="Identifier">&gt;</span>
+      <span class="Identifier">&lt;</span><span class="Identifier">draw_rectangle</span><span class="Identifier"> </span><span class="Type">pos</span>=<span class="Constant">'10:670,10:85'</span><span class="Identifier"> </span><span class="Type">dims</span>=<span class="Constant">'20,20'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'0,0,255'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'4.0'</span><span class="Identifier"> /&gt;</span>
+    <span class="Identifier">&lt;/</span><span class="Identifier">for</span><span class="Identifier">&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">display</span><span class="Identifier"> /&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">write</span><span class="Identifier"> </span><span class="Type">filename</span>=<span class="Constant">'rngl-05a.png'</span><span class="Identifier"> /&gt;</span>
+  <span class="Identifier">&lt;/</span><span class="Identifier">image</span><span class="Identifier">&gt;</span>
+<span class="Identifier">&lt;/</span><span class="Identifier">msl</span><span class="Identifier">&gt;</span>
+</pre>
+
+<p><img src='./ressources/img-35.gif' /></p>
+
+<p><a href="./tut-xmgk-12.html">&lt;-</a> / -&gt;</p>
+
+</body>
+</html>
