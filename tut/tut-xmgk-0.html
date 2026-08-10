@@ -1,0 +1,152 @@
+<html>
+<head>
+<title>xmgk - tutorial - install</title>
+<style>
+<!--
+/*
+pre { color:#000000; background-color:#ffffff; }
+body { font-family:monospace; color:#000000; background-color:#ffffff; }
+.Type { color:#008000; }
+.Identifier { color:#008080; }
+.Constant { color:#c00000; }
+*/
+body { color:#000; background-color:#fff; }
+code { border:1px solid #000; }
+pre { border:1px solid #100401; margin-right:20%; }
+.Special { color:#cfa796; }
+.Statement { color:#d0c010; }
+.Type { color:#47cf7f; }
+.PreProc { color:#2fa7df; }
+.Constant { color:#ff40ff; }
+-->
+</style>
+</head>
+<body>
+<h1>xmgk - tutorial - install</h1>
+<p>in this post-tutorial, we see how to download and
+install <code>xmgk</code>, a command-line utility,
+for creating or modifying images, from and <code>.xml</code>
+scripted interface, with layers,</p>
+<p>it first need an <code>mgk</code> interface, but it is
+already provided by the following archieve,</p>
+
+<pre>
+$ wget <a href="https://fccm2.github.io/fccm-ocaml-download/download/downloads-04/mgkmsl/mgk-gen-msl-0.01.5b.tar.lzma">https://fccm2.github.io/fccm-ocaml-download/download/downloads-04/mgkmsl/mgk-gen-msl-0.01.5b.tar.lzma</a>
+</pre>
+
+<p>then you can open this archieve like this,</p>
+
+<pre>
+$ lzcat mgk-gen-msl-0.01.5b.tar.lzma | tar xf -
+</pre>
+
+<p>check if everything happened correctly,</p>
+
+<pre>
+$ ls
+   mgk-gen-msl-0.01.5b.tar.lzma
+   mgk-gen-msl-0.01.5b/
+</pre>
+
+<p>the downloaded archieve, and its contained directory,</p>
+
+<pre>
+$ wget https://fccm2.github.io/fccm-ocaml-download/download/downloads-04/mgkmsl/mgk-gen-msl-0.01.5b-c.patch.lzma
+$ wget https://fccm2.github.io/fccm-ocaml-download/download/downloads-04/mgkmsl/mgk-gen-msl-0.01.5c-d.patch.lzma
+$ wget https://fccm2.github.io/fccm-ocaml-download/download/downloads-04/mgkmsl/mgk-gen-msl-0.01.5d-e.patch.lzma
+$ wget https://fccm2.github.io/fccm-ocaml-download/download/downloads-04/mgkmsl/mgk-gen-msl-0.01.5e-f.patch.lzma
+</pre>
+
+<pre>
+$ unlzma mgk-gen-msl-0.01.5b-c.patch.lzma
+$ unlzma mgk-gen-msl-0.01.5c-d.patch.lzma
+$ unlzma mgk-gen-msl-0.01.5d-e.patch.lzma
+$ unlzma mgk-gen-msl-0.01.5e-f.patch.lzma
+
+$ ls
+   mgk-gen-msl-0.01.5b-c.patch
+   mgk-gen-msl-0.01.5c-d.patch
+   mgk-gen-msl-0.01.5d-e.patch
+   mgk-gen-msl-0.01.5e-f.patch
+</pre>
+
+<pre>
+$ cd mgk-gen-msl-0.01.5b/
+</pre>
+
+<pre>
+$ patch -p1 &lt; ../mgk-gen-msl-0.01.5b-c.patch
+$ patch -p1 &lt; ../mgk-gen-msl-0.01.5c-d.patch
+$ patch -p1 &lt; ../mgk-gen-msl-0.01.5d-e.patch
+$ patch -p1 &lt; ../mgk-gen-msl-0.01.5e-f.patch
+</pre>
+
+<pre>
+$ cd ..
+$ mv mgk-gen-msl-0.01.5b/ mgk-gen-msl-0.01.5f/
+</pre>
+
+<p>in case you are also interested by two additional
+preprocessors,</p>
+
+<pre>
+$ wget <a href="https://fccm2.github.io/fccm-ocaml-patches/patch/mslpp/mgk-gen-msl-0.01.5f-7a.patch.lzma">https://fccm2.github.io/fccm-ocaml-patches/patch/mslpp/mgk-gen-msl-0.01.5f-7a.patch.lzma</a>
+$ wget <a href="https://fccm2.github.io/fccm-ocaml-patches/patch/mslpp/mgk-gen-msl-0.01.7a-7b.patch.lzma">https://fccm2.github.io/fccm-ocaml-patches/patch/mslpp/mgk-gen-msl-0.01.7a-7b.patch.lzma</a>
+</pre>
+
+<pre>
+$ unlzma mgk-gen-msl-0.01.5f-7a.patch.lzma
+$ unlzma mgk-gen-msl-0.01.7a-7b.patch.lzma
+$ ls
+   mgk-gen-msl-0.01.5f-7a.patch
+   mgk-gen-msl-0.01.7a-7b.patch
+
+$ cd mgk-gen-msl-0.01.5f/
+</pre>
+
+<pre>
+$ patch -p1 &lt; ../mgk-gen-msl-0.01.5f-7a.patch
+$ patch -p1 &lt; ../mgk-gen-msl-0.01.7a-7b.patch
+
+$ cd ..
+$ ls
+    mgk-gen-msl-0.01.5f/
+
+$ mv mgk-gen-msl-0.01.5f/ mgk-gen-msl-0.01.7b/
+</pre>
+
+<pre>
+$ cd mgk-gen-msl-0.01.7b/
+</pre>
+
+<pre>
+$ cd src/
+$ make
+$ cd ../path/
+$ make
+</pre>
+
+<pre>
+$ cd ..
+$ cd msl/
+
+$ make dep
+$ make
+</pre>
+
+<pre>
+$ man ./xmgk.1
+</pre>
+
+<p>and the two preprocessors,</p>
+
+<pre>
+$ make -f strings.mk
+$ make -f pppo0.mk
+$ make -f pppo1.mk
+</pre>
+
+<p>only one level of <code>&lt;for&gt;&lt;/for&gt;</code></p>
+
+</body>
+</html>

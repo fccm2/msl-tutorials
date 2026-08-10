@@ -1,0 +1,97 @@
+<html>
+<head>
+<title>xmgk - tutorial</title>
+<style>
+<!--
+/*
+pre { color:#000000; background-color:#ffffff; }
+body { font-family:monospace; color:#000000; background-color:#ffffff; }
+.Type { color:#008000; }
+.Identifier { color:#008080; }
+.Constant { color:#c00000; }
+*/
+body { color:#000; background-color:#fff; }
+code { border:1px solid #000; }
+pre { border:1px solid #100401; margin-right:20%; }
+.Special { color:#cfa796; }
+.Statement { color:#d0c010; }
+.Type { color:#47cf7f; }
+.PreProc { color:#2fa7df; }
+.Constant { color:#ff40ff; }
+-->
+</style>
+</head>
+<body>
+<h1>xmgk - tutorial</h1>
+<p>here is a tutorial about <code>xmgk</code>,
+a command-line utility, with which you may
+eventually, create images</p>
+<p>here is a small example, <code>img-1.xml</code>,
+it will create a small image of dimensions <code>170x110</code>,
+with a background color of <code>195,254,215</code>,</p>
+<pre>
+<span class="Identifier">&lt;</span><span class="Identifier">msl</span><span class="Identifier">&gt;</span>
+  <span class="Identifier">&lt;</span><span class="Identifier">image</span><span class="Identifier">&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">new</span><span class="Identifier"> </span><span class="Type">w</span>=<span class="Constant">'170'</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'110'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'195,254,215'</span><span class="Identifier"> /&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">display</span><span class="Identifier"> /&gt;</span>
+  <span class="Identifier">&lt;/</span><span class="Identifier">image</span><span class="Identifier">&gt;</span>
+<span class="Identifier">&lt;/</span><span class="Identifier">msl</span><span class="Identifier">&gt;</span>
+</pre>
+
+<img src='./ressources/img-1.png' />
+
+<p>if you add the following line after the <code>display</code> instruction,
+it will produce the image above,</p>
+
+<pre>
+    <span class="Identifier">&lt;</span><span class="Identifier">write</span><span class="Identifier"> </span><span class="Type">filename</span>=<span class="Constant">'img-1.png'</span><span class="Identifier"> /&gt;</span>
+</pre>
+
+<p>a second example</p>
+
+<img src='./ressources/img-3.png' />
+
+<p><code>img-2.xml</code></p>
+
+<pre>
+<span class="Comment">&lt;?</span><span class="Type">xml</span><span class="Type"> </span><span class="Type">version</span>=<span class="Constant">&quot;1.0&quot;</span><span class="Type"> </span><span class="Comment">?&gt;</span>
+<span class="Identifier">&lt;</span><span class="Identifier">msl</span><span class="Identifier">&gt;</span>
+  <span class="Identifier">&lt;</span><span class="Identifier">image</span><span class="Identifier">&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">merge</span><span class="Identifier">&gt;</span>
+      <span class="Identifier">&lt;</span><span class="Identifier">layer</span><span class="Identifier">&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">new</span><span class="Identifier"> </span><span class="Type">w</span>=<span class="Constant">'190'</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'230'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'195,254,215'</span><span class="Identifier"> /&gt;</span>
+      <span class="Identifier">&lt;/</span><span class="Identifier">layer</span><span class="Identifier">&gt;</span>
+      <span class="Identifier">&lt;</span><span class="Identifier">layer</span><span class="Identifier"> </span><span class="Type">compose</span>=<span class="Constant">'multiply'</span><span class="Identifier">&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">new</span><span class="Identifier"> </span><span class="Type">w</span>=<span class="Constant">'500'</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'400'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'255,255,255'</span><span class="Identifier"> /&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'relative'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'195,255,185'</span><span class="Identifier">&gt;</span>
+          <span class="Identifier">&lt;</span><span class="Identifier">move_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'55 25'</span><span class="Identifier"> /&gt;</span>
+	  <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'29 2'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'31 41'</span><span class="Identifier"> /&gt;</span>
+	  <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'-2 30'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'-21 43'</span><span class="Identifier"> /&gt;</span>
+	  <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'-3 1'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'-7 2'</span><span class="Identifier"> /&gt;</span>
+	  <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'-20 -2'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'-21 -41'</span><span class="Identifier"> /&gt;</span>
+	  <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'-1 -39'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'17 -45'</span><span class="Identifier"> /&gt;</span>
+          <span class="Identifier">&lt;</span><span class="Identifier">close_path</span><span class="Identifier"> /&gt;</span>
+        <span class="Identifier">&lt;/</span><span class="Identifier">path</span><span class="Identifier">&gt;</span>
+      <span class="Identifier">&lt;/</span><span class="Identifier">layer</span><span class="Identifier">&gt;</span>
+      <span class="Identifier">&lt;</span><span class="Identifier">layer</span><span class="Identifier"> </span><span class="Type">compose</span>=<span class="Constant">'multiply'</span><span class="Identifier">&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">new</span><span class="Identifier"> </span><span class="Type">w</span>=<span class="Constant">'500'</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'400'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'255,255,255'</span><span class="Identifier"> /&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">path</span><span class="Identifier"> </span><span class="Type">coord</span>=<span class="Constant">'relative'</span><span class="Identifier"> </span><span class="Type">rgb_stroke</span>=<span class="Constant">'50,110,70'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'2.8'</span><span class="Identifier">&gt;</span>
+          <span class="Identifier">&lt;</span><span class="Identifier">move_to</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'51 29'</span><span class="Identifier"> /&gt;</span>
+	  <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'29 2'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'31 41'</span><span class="Identifier"> /&gt;</span>
+	  <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'-2 30'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'-21 43'</span><span class="Identifier"> /&gt;</span>
+	  <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'-3 1'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'-7 2'</span><span class="Identifier"> /&gt;</span>
+	  <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'-20 -2'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'-21 -41'</span><span class="Identifier"> /&gt;</span>
+	  <span class="Identifier">&lt;</span><span class="Identifier">quad_curve_to</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'-1 -39'</span><span class="Identifier"> </span><span class="Type">p</span>=<span class="Constant">'13 -39'</span><span class="Identifier"> /&gt;</span>
+        <span class="Identifier">&lt;/</span><span class="Identifier">path</span><span class="Identifier">&gt;</span>
+      <span class="Identifier">&lt;/</span><span class="Identifier">layer</span><span class="Identifier">&gt;</span>
+    <span class="Identifier">&lt;/</span><span class="Identifier">merge</span><span class="Identifier">&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">display</span><span class="Identifier"> /&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">write</span><span class="Identifier"> </span><span class="Type">filename</span>=<span class="Constant">'img-3.png'</span><span class="Identifier"> /&gt;</span>
+  <span class="Identifier">&lt;/</span><span class="Identifier">image</span><span class="Identifier">&gt;</span>
+<span class="Identifier">&lt;/</span><span class="Identifier">msl</span><span class="Identifier">&gt;</span>
+</pre>
+
+<a href="./tut-xmgk-0.html">&lt;-</a> / -&gt;
+
+</body>
+</html>
