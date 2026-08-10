@@ -1,0 +1,222 @@
+<html>
+<head>
+<title>xmgk - tutorial - timeline</title>
+<style>
+<!--
+/*
+pre { color:#000000; background-color:#ffffff; }
+body { font-family:monospace; color:#000000; background-color:#ffffff; }
+.Type { color:#008000; }
+.Identifier { color:#008080; }
+.Constant { color:#c00000; }
+*/
+body { color:#000; background-color:#fff; }
+code { border:1px solid #000; }
+pre { border:1px solid #100401; margin-right:20%; }
+.Special { color:#cfa796; }
+.Statement { color:#d0c010; }
+.Type { color:#47cf7f; }
+.PreProc { color:#2fa7df; }
+.Constant { color:#ff40ff; }
+table, tr, td { border:0px; }
+-->
+</style>
+</head>
+<body>
+<h1>xmgk - tutorial - timeline</h1>
+
+<p>several linear timelined values</p>
+
+<p><code>img-37.xml</code></p>
+
+<p><img style='border:1px solid #00f;' src='./ressources/img-37.gif' /></p>
+
+<p><code>"10,10:10,175:125,175:125,355!0-170!170-220!220-270"</code></p>
+
+<p>there are <code>n-1</code> number of times-range
+compared to the number of values, the times-ranges
+being the elapse of time between each values</p>
+
+<pre>
+<span class="Identifier">&lt;</span><span class="Identifier">msl</span><span class="Identifier">&gt;</span>
+  <span class="Identifier">&lt;</span><span class="Identifier">image</span><span class="Identifier">&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">new</span><span class="Identifier"> </span><span class="Type">w</span>=<span class="Constant">'170'</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'510'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'215,231,245'</span><span class="Identifier"> /&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">draw_rectangle</span><span class="Identifier"> </span><span class="Type">pos</span>=<span class="Constant">'10,10'</span><span class="Identifier"> </span><span class="Type">dims</span>=<span class="Constant">'20,20'</span><span class="Identifier"> </span><span class="Type">rgb_stroke</span>=<span class="Constant">'0,0,255'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'1.0'</span><span class="Identifier"> /&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">display</span><span class="Identifier"> /&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">write</span><span class="Identifier"> </span><span class="Type">filename</span>=<span class="Constant">'rngl-07.png'</span><span class="Identifier"> /&gt;</span>
+  <span class="Identifier">&lt;/</span><span class="Identifier">image</span><span class="Identifier">&gt;</span>
+<span class="Identifier">&lt;/</span><span class="Identifier">msl</span><span class="Identifier">&gt;</span>
+</pre>
+
+<pre>$ pppt 0 img-37.xml &gt; img-37.0.xml</pre>
+
+<pre>
+<span class="Identifier">&lt;</span><span class="Identifier">msl</span><span class="Identifier">&gt;</span>
+  <span class="Identifier">&lt;</span><span class="Identifier">image</span><span class="Identifier">&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">new</span><span class="Identifier"> </span><span class="Type">w</span>=<span class="Constant">'170'</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'510'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'215,231,245'</span><span class="Identifier"> /&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">draw_rectangle</span><span class="Identifier"> </span><span class="Type">pos</span>=<span class="Constant">'10,10:10,175:125,175:125,355!0-170!170-220!220-270'</span><span class="Identifier"> </span><span class="Type">dims</span>=<span class="Constant">'20,20'</span><span class="Identifier"> </span><span class="Type">rgb_stroke</span>=<span class="Constant">'0,0,255'</span><span class="Identifier"> </span><span class="Type">stroke_width</span>=<span class="Constant">'1.0'</span><span class="Identifier"> /&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">display</span><span class="Identifier"> /&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">write</span><span class="Identifier"> </span><span class="Type">filename</span>=<span class="Constant">'rngl-07.png'</span><span class="Identifier"> /&gt;</span>
+  <span class="Identifier">&lt;/</span><span class="Identifier">image</span><span class="Identifier">&gt;</span>
+<span class="Identifier">&lt;/</span><span class="Identifier">msl</span><span class="Identifier">&gt;</span>
+</pre>
+
+<p><a href="./tut-xmgk-13.html">&lt;-</a> / -&gt;</p>
+
+<pre style="font-size:0.5em;">
+./pppt.opt  0 img-37.xml &gt; img-37.0.xml
+./pppt.opt 10 img-37.xml &gt; img-37.10.xml
+./pppt.opt 20 img-37.xml &gt; img-37.20.xml
+./pppt.opt 30 img-37.xml &gt; img-37.30.xml
+./pppt.opt 40 img-37.xml &gt; img-37.40.xml
+./pppt.opt 50 img-37.xml &gt; img-37.50.xml
+./pppt.opt 60 img-37.xml &gt; img-37.60.xml
+./pppt.opt 70 img-37.xml &gt; img-37.70.xml
+./pppt.opt 80 img-37.xml &gt; img-37.80.xml
+./pppt.opt 90 img-37.xml &gt; img-37.90.xml
+./pppt.opt 100 img-37.xml &gt; img-37.100.xml
+./pppt.opt 110 img-37.xml &gt; img-37.110.xml
+./pppt.opt 120 img-37.xml &gt; img-37.120.xml
+./pppt.opt 130 img-37.xml &gt; img-37.130.xml
+./pppt.opt 140 img-37.xml &gt; img-37.140.xml
+./pppt.opt 150 img-37.xml &gt; img-37.150.xml
+./pppt.opt 160 img-37.xml &gt; img-37.160.xml
+./pppt.opt 170 img-37.xml &gt; img-37.170.xml
+./pppt.opt 180 img-37.xml &gt; img-37.180.xml
+./pppt.opt 190 img-37.xml &gt; img-37.190.xml
+./pppt.opt 200 img-37.xml &gt; img-37.200.xml
+./pppt.opt 210 img-37.xml &gt; img-37.210.xml
+./pppt.opt 220 img-37.xml &gt; img-37.220.xml
+./pppt.opt 230 img-37.xml &gt; img-37.230.xml
+./pppt.opt 240 img-37.xml &gt; img-37.240.xml
+./pppt.opt 250 img-37.xml &gt; img-37.250.xml
+./pppt.opt 260 img-37.xml &gt; img-37.260.xml
+./pppt.opt 270 img-37.xml &gt; img-37.270.xml
+
+./xmgk.opt img-37.0.xml  &amp;&amp; mv rngl-07.png  img-37.0.png
+./xmgk.opt img-37.10.xml &amp;&amp; mv rngl-07.png  img-37.10.png
+./xmgk.opt img-37.20.xml &amp;&amp; mv rngl-07.png  img-37.20.png
+./xmgk.opt img-37.30.xml &amp;&amp; mv rngl-07.png  img-37.30.png
+./xmgk.opt img-37.40.xml &amp;&amp; mv rngl-07.png  img-37.40.png
+./xmgk.opt img-37.50.xml &amp;&amp; mv rngl-07.png  img-37.50.png
+./xmgk.opt img-37.60.xml &amp;&amp; mv rngl-07.png  img-37.60.png
+./xmgk.opt img-37.70.xml &amp;&amp; mv rngl-07.png  img-37.70.png
+./xmgk.opt img-37.80.xml &amp;&amp; mv rngl-07.png  img-37.80.png
+./xmgk.opt img-37.90.xml &amp;&amp; mv rngl-07.png  img-37.90.png
+./xmgk.opt img-37.100.xml &amp;&amp; mv rngl-07.png  img-37.100.png
+./xmgk.opt img-37.110.xml &amp;&amp; mv rngl-07.png  img-37.110.png
+./xmgk.opt img-37.120.xml &amp;&amp; mv rngl-07.png  img-37.120.png
+./xmgk.opt img-37.130.xml &amp;&amp; mv rngl-07.png  img-37.130.png
+./xmgk.opt img-37.140.xml &amp;&amp; mv rngl-07.png  img-37.140.png
+./xmgk.opt img-37.150.xml &amp;&amp; mv rngl-07.png  img-37.150.png
+./xmgk.opt img-37.160.xml &amp;&amp; mv rngl-07.png  img-37.160.png
+./xmgk.opt img-37.170.xml &amp;&amp; mv rngl-07.png  img-37.170.png
+./xmgk.opt img-37.180.xml &amp;&amp; mv rngl-07.png  img-37.180.png
+./xmgk.opt img-37.190.xml &amp;&amp; mv rngl-07.png  img-37.190.png
+./xmgk.opt img-37.200.xml &amp;&amp; mv rngl-07.png  img-37.200.png
+./xmgk.opt img-37.210.xml &amp;&amp; mv rngl-07.png  img-37.210.png
+./xmgk.opt img-37.220.xml &amp;&amp; mv rngl-07.png  img-37.220.png
+./xmgk.opt img-37.230.xml &amp;&amp; mv rngl-07.png  img-37.230.png
+./xmgk.opt img-37.240.xml &amp;&amp; mv rngl-07.png  img-37.240.png
+./xmgk.opt img-37.250.xml &amp;&amp; mv rngl-07.png  img-37.250.png
+./xmgk.opt img-37.260.xml &amp;&amp; mv rngl-07.png  img-37.260.png
+./xmgk.opt img-37.270.xml &amp;&amp; mv rngl-07.png  img-37.270.png
+
+rm -f \
+ img-37.0.xml \
+ img-37.10.xml \
+ img-37.20.xml \
+ img-37.30.xml \
+ img-37.40.xml \
+ img-37.50.xml \
+ img-37.60.xml \
+ img-37.70.xml \
+ img-37.80.xml \
+ img-37.90.xml \
+ img-37.100.xml \
+ img-37.110.xml \
+ img-37.120.xml \
+ img-37.130.xml \
+ img-37.140.xml \
+ img-37.150.xml \
+ img-37.160.xml \
+ img-37.170.xml \
+ img-37.180.xml \
+ img-37.190.xml \
+ img-37.200.xml \
+ img-37.210.xml \
+ img-37.220.xml \
+ img-37.230.xml \
+ img-37.240.xml \
+ img-37.250.xml \
+ img-37.260.xml \
+ img-37.270.xml \
+ #eol
+
+convert -delay 20 -loop 0 \
+ img-37.0.png \
+ img-37.10.png \
+ img-37.20.png \
+ img-37.30.png \
+ img-37.40.png \
+ img-37.50.png \
+ img-37.60.png \
+ img-37.70.png \
+ img-37.80.png \
+ img-37.90.png \
+ img-37.100.png \
+ img-37.110.png \
+ img-37.120.png \
+ img-37.130.png \
+ img-37.140.png \
+ img-37.150.png \
+ img-37.160.png \
+ img-37.170.png \
+ img-37.180.png \
+ img-37.190.png \
+ img-37.200.png \
+ img-37.210.png \
+ img-37.220.png \
+ img-37.230.png \
+ img-37.240.png \
+ img-37.250.png \
+ img-37.260.png \
+ img-37.270.png \
+ img-37.gif
+
+rm -f \
+ img-37.0.png \
+ img-37.10.png \
+ img-37.20.png \
+ img-37.30.png \
+ img-37.40.png \
+ img-37.50.png \
+ img-37.60.png \
+ img-37.70.png \
+ img-37.80.png \
+ img-37.90.png \
+ img-37.100.png \
+ img-37.110.png \
+ img-37.120.png \
+ img-37.130.png \
+ img-37.140.png \
+ img-37.150.png \
+ img-37.160.png \
+ img-37.170.png \
+ img-37.180.png \
+ img-37.190.png \
+ img-37.200.png \
+ img-37.210.png \
+ img-37.220.png \
+ img-37.230.png \
+ img-37.240.png \
+ img-37.250.png \
+ img-37.260.png \
+ img-37.270.png \
+ #eol
+</pre>
+
+<p><a href="./tut-xmgk-13.html">&lt;-</a> / -&gt;</p>
+
+</body>
+</html>
