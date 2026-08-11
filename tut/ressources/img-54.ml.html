@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>mgk-gen-msl-0.01.7l/msl/img-54.ml</title>
+<meta name="Generator" content="Vim/9.1" />
+<meta name="plugin-version" content="vim9.0_v2" />
+<meta name="syntax" content="ocaml" />
+<meta name="settings" content="use_css,no_foldcolumn,expand_tabs,pre_wrap,prevent_copy=,use_input_for_pc=none" />
+<meta name="colorscheme" content="pablo" />
+<style>
+<!--
+pre { border:1px solid #171410; margin:2px; }
+pre { white-space:pre-wrap; font-family:monospace; color:#ffffff; background-color:#000000; }
+body { font-family:monospace; color:#ffffff; background-color:#000000; }
+* { font-size:1em; }
+a { color:inherit; }
+.Constant { color:#00ffff; }
+.Comment { color:#808080; }
+.Statement { color:#afaf00; font-weight:bold; }
+.PreProc { color:#00ff00; }
+.Type { color:#00af00; }
+-->
+</style>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="Statement">module</span><span class="PreProc"> Xmgk</span> <span class="Statement">:</span> <span class="PreProc">sig</span>
+  <span class="Statement">type</span> rgb = <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span>
+  <span class="Statement">type</span> coord = Relative | Absolute
+  <span class="Statement">type</span> stroke = rgb <span class="Statement">*</span> <span class="Type">float</span>
+  <span class="Statement">type</span> path_new = Path <span class="Statement">of</span> coord <span class="Statement">*</span> rgb <span class="Type">option</span> <span class="Statement">*</span> stroke <span class="Type">option</span>
+
+  <span class="Statement">type</span> image_uninitialized
+  <span class="Statement">type</span> image
+  <span class="Statement">type</span> image_closed
+  <span class="Statement">type</span> prim = New <span class="Statement">of</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span> <span class="Statement">*</span> rgb
+
+  <span class="Statement">val</span> new_image <span class="Statement">:</span> <span class="Type">unit</span> <span class="Statement">-&gt;</span> image_uninitialized
+  <span class="Statement">val</span> close_image <span class="Statement">:</span> image <span class="Statement">-&gt;</span> image_closed
+
+  <span class="Statement">val</span> image_add_prim <span class="Statement">:</span> prim <span class="Statement">-&gt;</span> image_uninitialized <span class="Statement">-&gt;</span> image
+
+  <span class="Statement">type</span> filter
+  <span class="Statement">val</span> image_add_filter <span class="Statement">:</span> filter <span class="Statement">-&gt;</span> image <span class="Statement">-&gt;</span> image
+
+  <span class="Statement">val</span> display <span class="Statement">:</span> filter
+  <span class="Statement">val</span> write <span class="Statement">:</span> <span class="Type">string</span> <span class="Statement">-&gt;</span> filter
+
+  <span class="Statement">type</span> msl
+  <span class="Statement">type</span> msl_closed
+
+  <span class="Statement">val</span> new_msl <span class="Statement">:</span> <span class="Type">unit</span> <span class="Statement">-&gt;</span> msl
+  <span class="Statement">val</span> close_msl <span class="Statement">:</span> msl <span class="Statement">-&gt;</span> msl_closed
+
+  <span class="Statement">val</span> msl_add_image <span class="Statement">:</span> image_closed <span class="Statement">-&gt;</span> msl <span class="Statement">-&gt;</span> msl
+  <span class="Statement">val</span> msl_print <span class="Statement">:</span> msl_closed <span class="Statement">-&gt;</span> <span class="Type">unit</span>
+
+  <span class="Statement">type</span> path
+  <span class="Statement">val</span> new_path <span class="Statement">:</span> path_new <span class="Statement">-&gt;</span> path
+  <span class="Statement">val</span> path_close <span class="Statement">:</span> path <span class="Statement">-&gt;</span> filter
+
+  <span class="Statement">type</span> path_elem =
+    | Move_to <span class="Statement">of</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span>
+    | H_line_to <span class="Statement">of</span> <span class="Type">int</span>
+    | V_line_to <span class="Statement">of</span> <span class="Type">int</span>
+    | Quad_curve_to <span class="Statement">of</span> <span class="Statement">(</span><span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span><span class="Statement">)</span> <span class="Statement">*</span> <span class="Statement">(</span><span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span><span class="Statement">)</span>
+    | Close_path
+
+  <span class="Statement">val</span> path_add_elem <span class="Statement">:</span> path_elem <span class="Statement">-&gt;</span> path <span class="Statement">-&gt;</span> path
+
+<span class="PreProc">end</span> <span class="Statement">=</span> <span class="PreProc">struct</span>
+  <span class="Statement">type</span> rgb = <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span>
+  <span class="Statement">type</span> coord = Relative | Absolute
+  <span class="Statement">type</span> stroke = rgb <span class="Statement">*</span> <span class="Type">float</span>
+  <span class="Statement">type</span> path_new = Path <span class="Statement">of</span> coord <span class="Statement">*</span> rgb <span class="Type">option</span> <span class="Statement">*</span> stroke <span class="Type">option</span>
+  <span class="Statement">type</span> path = <span class="Type">string</span> <span class="Type">list</span>
+  <span class="Statement">type</span> filter = <span class="Type">string</span> <span class="Type">list</span>
+
+  <span class="Statement">type</span> prim = New <span class="Statement">of</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span> <span class="Statement">*</span> rgb
+
+  <span class="Statement">type</span> image_uninitialized = <span class="Type">string</span> <span class="Type">list</span>
+  <span class="Statement">type</span> image = <span class="Type">string</span> <span class="Type">list</span>
+  <span class="Statement">type</span> image_closed = <span class="Type">string</span> <span class="Type">list</span>
+
+  <span class="Statement">type</span> msl = <span class="Type">string</span> <span class="Type">list</span>
+  <span class="Statement">type</span> msl_closed = <span class="Type">string</span> <span class="Type">list</span>
+  <span class="Statement">let</span> msl_print msl <span class="Statement">=</span>
+    <span class="PreProc">List</span>.iter print_endline msl
+
+  <span class="Statement">let</span> msl_add_image image msl <span class="Statement">=</span>
+    image @ msl
+
+  <span class="Statement">let</span> image_add_filter filter image <span class="Statement">=</span>
+    filter @ image
+
+  <span class="Statement">let</span> new_msl <span class="Constant">()</span> <span class="Statement">=</span>
+    <span class="Constant">&quot;&lt;msl&gt;&quot;</span>::<span class="Constant">[]</span>
+  <span class="Statement">let</span> close_msl msl <span class="Statement">=</span>
+    <span class="Constant">&quot;&lt;/msl&gt;&quot;</span>::msl |&gt; <span class="PreProc">List</span>.rev
+
+  <span class="Statement">let</span> new_image <span class="Constant">()</span> <span class="Statement">=</span>
+    <span class="Constant">&quot;&lt;image&gt;&quot;</span>::<span class="Constant">[]</span>
+  <span class="Statement">let</span> close_image image <span class="Statement">=</span>
+    <span class="Constant">&quot;&lt;/image&gt;&quot;</span>::image
+
+  <span class="Statement">let</span> path_close path <span class="Statement">=</span> <span class="Constant">&quot;&lt;/path&gt;&quot;</span>::path
+
+  <span class="Statement">let</span> image_add_prim prim image <span class="Statement">=</span>
+    <span class="Statement">match</span> prim <span class="Statement">with</span>
+    <span class="Statement">|</span> <span class="Constant">New</span> <span class="Statement">(</span>w, h, <span class="Statement">(</span>r, g, b<span class="Statement">))</span> <span class="Statement">-&gt;</span>
+        <span class="Statement">let</span> prim <span class="Statement">=</span> <span class="PreProc">Printf</span>.sprintf <span class="Constant">&quot;&lt;new w='%d' h='%d' rgb='%d,%d,%d' /&gt;&quot;</span> w h r g b <span class="Statement">in</span>
+        prim :: image
+
+  <span class="Statement">let</span> new_path path_init <span class="Statement">=</span>
+    <span class="Statement">let</span> s_rgb rgb <span class="Statement">=</span>
+      <span class="Statement">match</span> rgb <span class="Statement">with</span> <span class="Constant">None</span> <span class="Statement">-&gt;</span> <span class="Constant">&quot;&quot;</span>
+      <span class="Statement">|</span> <span class="Constant">Some</span> <span class="Statement">(</span>r, g, b<span class="Statement">)</span> <span class="Statement">-&gt;</span>
+          <span class="Statement">let</span> rgb <span class="Statement">=</span> <span class="PreProc">Printf</span>.sprintf <span class="Constant">&quot; rgb='%d,%d,%d'&quot;</span> r g b <span class="Statement">in</span>
+          rgb
+    <span class="Statement">in</span>
+    <span class="Statement">let</span> s_stroke stroke <span class="Statement">=</span>
+      <span class="Statement">match</span> stroke <span class="Statement">with</span> <span class="Constant">None</span> <span class="Statement">-&gt;</span> <span class="Constant">&quot;&quot;</span>
+      <span class="Statement">|</span> <span class="Constant">Some</span> <span class="Statement">((</span>r, g, b<span class="Statement">)</span>, sw<span class="Statement">)</span> <span class="Statement">-&gt;</span>
+          <span class="Statement">let</span> stroke <span class="Statement">=</span> <span class="PreProc">Printf</span>.sprintf <span class="Constant">&quot; rgb_stroke='%d,%d,%d' stroke_width='%g'&quot;</span> r g b sw <span class="Statement">in</span>
+          stroke
+    <span class="Statement">in</span>
+    <span class="Statement">match</span> path_init <span class="Statement">with</span>
+    <span class="Statement">|</span> <span class="Constant">Path</span> <span class="Statement">(</span>coord, rgb, stroke<span class="Statement">)</span> <span class="Statement">-&gt;</span>
+        <span class="Statement">let</span> path <span class="Statement">=</span>
+          <span class="PreProc">Printf</span>.sprintf
+            <span class="Constant">&quot;&lt;path coord='relative'%s%s&gt;&quot;</span>
+            <span class="Statement">(</span>s_rgb rgb<span class="Statement">)</span>
+            <span class="Statement">(</span>s_stroke stroke<span class="Statement">)</span>
+        <span class="Statement">in</span>
+        path :: <span class="Constant">[]</span>
+
+  <span class="Statement">type</span> path_elem =
+    | Move_to <span class="Statement">of</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span>
+    | H_line_to <span class="Statement">of</span> <span class="Type">int</span>
+    | V_line_to <span class="Statement">of</span> <span class="Type">int</span>
+    | Quad_curve_to <span class="Statement">of</span> <span class="Statement">(</span><span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span><span class="Statement">)</span> <span class="Statement">*</span> <span class="Statement">(</span><span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span><span class="Statement">)</span>
+    | Close_path
+
+  <span class="Statement">let</span> path_add_elem elem path <span class="Statement">=</span>
+    <span class="Statement">match</span> elem <span class="Statement">with</span>
+    <span class="Statement">|</span> <span class="Constant">Close_path</span> <span class="Statement">-&gt;</span>
+        <span class="Statement">let</span> close_path <span class="Statement">=</span> <span class="PreProc">Printf</span>.sprintf <span class="Constant">&quot;&lt;close_path /&gt;&quot;</span> <span class="Statement">in</span>
+        close_path :: path
+    <span class="Statement">|</span> <span class="Constant">Move_to</span> <span class="Statement">(</span>x, y<span class="Statement">)</span> <span class="Statement">-&gt;</span>
+        <span class="Statement">let</span> move_to <span class="Statement">=</span> <span class="PreProc">Printf</span>.sprintf <span class="Constant">&quot;&lt;move_to p='%d,%d' /&gt;&quot;</span> x y <span class="Statement">in</span>
+        move_to :: path
+    <span class="Statement">|</span> <span class="Constant">H_line_to</span> h <span class="Statement">-&gt;</span>
+        <span class="Statement">let</span> h_line <span class="Statement">=</span> <span class="PreProc">Printf</span>.sprintf <span class="Constant">&quot;&lt;h_line_to h='%d' /&gt;&quot;</span> h <span class="Statement">in</span>
+        h_line :: path
+    <span class="Statement">|</span> <span class="Constant">V_line_to</span> v <span class="Statement">-&gt;</span>
+        <span class="Statement">let</span> v_line <span class="Statement">=</span> <span class="PreProc">Printf</span>.sprintf <span class="Constant">&quot;&lt;v_line_to v='%d' /&gt;&quot;</span> v <span class="Statement">in</span>
+        v_line :: path
+    <span class="Statement">|</span> <span class="Constant">Quad_curve_to</span> <span class="Statement">((</span>h0, h1<span class="Statement">)</span>, <span class="Statement">(</span>p0, p1<span class="Statement">))</span> <span class="Statement">-&gt;</span>
+        <span class="Statement">let</span> quad_curve <span class="Statement">=</span> <span class="PreProc">Printf</span>.sprintf <span class="Constant">&quot;&lt;quad_curve_to h='%d,%d' p='%d,%d' /&gt;&quot;</span> h0 h1 p0 p1 <span class="Statement">in</span>
+        quad_curve :: path
+
+  <span class="Statement">let</span> display <span class="Statement">=</span> <span class="PreProc">Printf</span>.sprintf <span class="Constant">&quot;&lt;display /&gt;&quot;</span> :: <span class="Constant">[]</span>
+  <span class="Statement">let</span> write filename <span class="Statement">=</span> <span class="PreProc">Printf</span>.sprintf <span class="Constant">&quot;&lt;write filename='%s' /&gt;&quot;</span> filename :: <span class="Constant">[]</span>
+<span class="PreProc">end</span>
+<span class="Comment">(*</span>
+<span class="Comment">let m () =</span>
+<span class="Comment">  let msl = Xmgk.new_msl () in</span>
+<span class="Comment">  let image = Xmgk.new_image () in</span>
+<span class="Comment">  let image = Xmgk.image_add_prim (New(500, 400, (15, 31, 127))) image in</span>
+<span class="Comment">  let path_init =</span>
+<span class="Comment">    (Xmgk.Path (Xmgk.Relative, Some (1, 5, 127), Some ((63, 223, 255), 2.0) ))</span>
+<span class="Comment">  in</span>
+<span class="Comment">  let path = Xmgk.new_path path_init in</span>
+<span class="Comment">  let path = Xmgk.path_add_elem (Move_to (10, 300)) path in</span>
+<span class="Comment">  let path = Xmgk.path_add_elem (H_line_to (40)) path in</span>
+<span class="Comment">  let path = Xmgk.path_add_elem (V_line_to (35)) path in</span>
+<span class="Comment">  let path = Xmgk.path_add_elem (H_line_to (55)) path in</span>
+<span class="Comment">  let path = Xmgk.path_add_elem (V_line_to (15)) path in</span>
+<span class="Comment">  let closed_path = Xmgk.path_close path in</span>
+<span class="Comment">  let image = Xmgk.image_add_filter closed_path image in</span>
+<span class="Comment">  let image = Xmgk.image_add_filter Xmgk.display image in</span>
+<span class="Comment">  let closed_image = Xmgk.close_image image in</span>
+<span class="Comment">  let msl = Xmgk.msl_add_image closed_image msl in</span>
+<span class="Comment">  let closed_msl = Xmgk.close_msl msl in</span>
+<span class="Comment">  Xmgk.msl_print closed_msl;</span>
+<span class="Comment">;;</span>
+<span class="Comment">*)</span>
+<span class="Statement">let</span> <span class="Constant">()</span> <span class="Statement">=</span>
+  <span class="PreProc">Random</span>.self_init <span class="Constant">()</span><span class="Statement">;</span>
+  <span class="Statement">let</span> msl <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.new_msl <span class="Constant">()</span> <span class="Statement">in</span>
+  <span class="Statement">let</span> image <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.new_image <span class="Constant">()</span> <span class="Statement">in</span>
+
+  <span class="Statement">let</span> image <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.image_add_prim <span class="Statement">(</span><span class="Constant">New</span><span class="Statement">(</span><span class="Constant">500</span>, <span class="Constant">400</span>, <span class="Statement">(</span><span class="Constant">15</span>, <span class="Constant">31</span>, <span class="Constant">127</span><span class="Statement">)))</span> image <span class="Statement">in</span>
+  <span class="Comment">(*</span>
+<span class="Comment">  let path_init = Xmgk.Path (Xmgk.Relative, Some (1, 5, 127), Some ((63, 223, 255), 2.0)) in</span>
+<span class="Comment">  let path = Xmgk.new_path path_init in</span>
+<span class="Comment">  let path = Xmgk.path_add_elem (Move_to (0, 270)) path in</span>
+<span class="Comment">  *)</span>
+  <span class="Comment">(*</span>
+<span class="Comment">  let path = Xmgk.path_add_elem (H_line_to (40)) path in</span>
+<span class="Comment">  let path = Xmgk.path_add_elem (V_line_to (35)) path in</span>
+<span class="Comment">  let path = Xmgk.path_add_elem (H_line_to (55)) path in</span>
+<span class="Comment">  let path = Xmgk.path_add_elem (V_line_to (15)) path in</span>
+<span class="Comment">  *)</span>
+  <span class="Statement">let</span> <span class="Statement">rec</span> path_aux d path <span class="Statement">(</span>x, y<span class="Statement">)</span> <span class="Statement">=</span>
+    <span class="Statement">if</span> d &lt;= <span class="Constant">0</span> <span class="Statement">then</span> <span class="Statement">begin</span>
+      <span class="Statement">let</span> path <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.path_add_elem <span class="Statement">(</span><span class="Constant">V_line_to</span> <span class="Statement">(</span><span class="Constant">100</span><span class="Statement">))</span> path <span class="Statement">in</span>
+      <span class="Statement">let</span> path <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.path_add_elem <span class="Statement">(</span><span class="Constant">H_line_to</span> <span class="Statement">(</span>-x<span class="Statement">))</span> path <span class="Statement">in</span>
+      <span class="Comment">(*</span>
+<span class="Comment">      let path = Xmgk.path_add_elem (V_line_to (-y)) path in</span>
+<span class="Comment">      let path = Xmgk.path_add_elem (Close_path) path in</span>
+<span class="Comment">      *)</span>
+      path
+    <span class="Statement">end</span> <span class="Statement">else</span>
+    <span class="Statement">match</span> <span class="PreProc">Random</span>.int <span class="Constant">2</span> <span class="Statement">with</span>
+    <span class="Statement">|</span> <span class="Constant">0</span> <span class="Statement">-&gt;</span>
+        <span class="Statement">let</span> v <span class="Statement">=</span> <span class="PreProc">Random</span>.int <span class="Constant">5</span> <span class="Statement">in</span>
+        <span class="Statement">let</span> path <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.path_add_elem <span class="Statement">(</span><span class="Constant">V_line_to</span> <span class="Statement">(</span>v*<span class="Constant">5</span><span class="Statement">))</span> path <span class="Statement">in</span>
+        path_aux <span class="Statement">(</span>d<span class="Constant">-1</span><span class="Statement">)</span> path <span class="Statement">(</span>x, y + v*<span class="Constant">5</span><span class="Statement">)</span>
+    <span class="Statement">|</span> <span class="Constant">1</span> <span class="Statement">-&gt;</span>
+        <span class="Statement">let</span> h <span class="Statement">=</span> <span class="PreProc">Random</span>.int <span class="Constant">9</span> <span class="Statement">in</span>
+        <span class="Statement">let</span> path <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.path_add_elem <span class="Statement">(</span><span class="Constant">H_line_to</span> <span class="Statement">(</span>h*<span class="Constant">5</span><span class="Statement">))</span> path <span class="Statement">in</span>
+        path_aux <span class="Statement">(</span>d<span class="Constant">-1</span><span class="Statement">)</span> path <span class="Statement">(</span>x + h*<span class="Constant">5</span>, y<span class="Statement">)</span>
+    <span class="Statement">|</span> <span class="Statement">_</span> <span class="Statement">-&gt;</span> <span class="Statement">assert</span> <span class="Constant">false</span>
+  <span class="Statement">in</span>
+  <span class="Comment">(*</span>
+<span class="Comment">  let path = path_aux 45 path in</span>
+<span class="Comment">  let closed_path = Xmgk.path_close path in</span>
+<span class="Comment">  let image = Xmgk.image_add_filter closed_path image in</span>
+<span class="Comment">  *)</span>
+
+  <span class="Statement">let</span> ref_image <span class="Statement">=</span> ref image <span class="Statement">in</span>
+
+  <span class="Statement">for</span> d <span class="Statement">=</span> <span class="Constant">0</span> <span class="Statement">to</span> pred <span class="Constant">10</span> <span class="Statement">do</span>
+    <span class="Statement">let</span> f v <span class="Statement">=</span> <span class="Statement">let</span> v <span class="Statement">=</span> v - <span class="Statement">(</span>d*<span class="Constant">5</span><span class="Statement">)</span> <span class="Statement">in</span> <span class="Statement">if</span> v &lt; <span class="Constant">0</span> <span class="Statement">then</span> <span class="Constant">0</span> <span class="Statement">else</span> v <span class="Statement">in</span>
+    <span class="Statement">let</span> d <span class="Statement">=</span> <span class="Constant">25</span> + <span class="Statement">(</span>d * <span class="Constant">30</span><span class="Statement">)</span> <span class="Statement">in</span>
+    <span class="Statement">let</span> image <span class="Statement">=</span> !ref_image <span class="Statement">in</span>
+
+    <span class="Statement">let</span> r, g, b <span class="Statement">=</span> <span class="Statement">(</span><span class="Constant">1</span>, <span class="Constant">5</span>, <span class="Constant">127</span><span class="Statement">)</span> <span class="Statement">in</span>
+    <span class="Statement">let</span> r, g, b <span class="Statement">=</span> <span class="Statement">(</span>f r, f g, f b<span class="Statement">)</span> <span class="Statement">in</span>
+    <span class="Statement">let</span> path_init <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.<span class="Constant">Path</span> <span class="Statement">(</span><span class="PreProc">Xmgk</span>.<span class="Constant">Relative</span>, <span class="Constant">Some</span> <span class="Statement">(</span>r, g, b<span class="Statement">)</span>, <span class="Constant">Some</span> <span class="Statement">((</span><span class="Constant">63</span>, <span class="Constant">223</span>, <span class="Constant">255</span><span class="Statement">)</span>, <span class="Constant">2.0</span><span class="Statement">))</span> <span class="Statement">in</span>
+    <span class="Statement">let</span> path <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.new_path path_init <span class="Statement">in</span>
+    <span class="Statement">let</span> path <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.path_add_elem <span class="Statement">(</span><span class="Constant">Move_to</span> <span class="Statement">(</span><span class="Constant">0</span>, d<span class="Statement">))</span> path <span class="Statement">in</span>
+    <span class="Statement">let</span> path <span class="Statement">=</span> path_aux <span class="Constant">55</span> path <span class="Statement">(</span><span class="Constant">0</span>, <span class="Constant">0</span><span class="Statement">)</span> <span class="Statement">in</span>
+    <span class="Statement">let</span> closed_path <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.path_close path <span class="Statement">in</span>
+    <span class="Statement">let</span> image <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.image_add_filter closed_path image <span class="Statement">in</span>
+
+    ref_image <span class="Statement">:=</span> image <span class="Statement">;</span>
+  <span class="Statement">done</span><span class="Statement">;</span>
+
+  <span class="Statement">let</span> image <span class="Statement">=</span> !ref_image <span class="Statement">in</span>
+
+  <span class="Statement">let</span> image <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.image_add_filter <span class="PreProc">Xmgk</span>.display image <span class="Statement">in</span>
+  <span class="Statement">let</span> closed_image <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.close_image image <span class="Statement">in</span>
+  <span class="Statement">let</span> msl <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.msl_add_image closed_image msl <span class="Statement">in</span>
+  <span class="Statement">let</span> closed_msl <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.close_msl msl <span class="Statement">in</span>
+  <span class="PreProc">Xmgk</span>.msl_print closed_msl<span class="Statement">;</span>
+<span class="Statement">;;</span>
+<span class="Comment">(*</span>
+<span class="Comment">    &lt;path coord='relative' rgb='1,5,127' rgb_stroke='63,223,255' stroke_width='2.0'&gt;</span>
+<span class="Comment">      &lt;move_to p='10 300' /&gt;</span>
+<span class="Comment">      &lt;h_line_to h='40' /&gt;</span>
+<span class="Comment">      &lt;v_line_to v='35' /&gt;</span>
+<span class="Comment">      &lt;h_line_to h='55' /&gt;</span>
+<span class="Comment">      &lt;v_line_to v='15' /&gt;</span>
+<span class="Comment">      &lt;quad_curve_to h='25 0' p='25 15' /&gt;</span>
+<span class="Comment">      &lt;v_line_to v='15' /&gt;</span>
+<span class="Comment">      &lt;h_line_to h='-120' /&gt;</span>
+<span class="Comment">      &lt;close_path /&gt;</span>
+<span class="Comment">    &lt;/path&gt;</span>
+<span class="Comment">*)</span>
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->
