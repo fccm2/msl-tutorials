@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>xmgk - tutorial - composite</title>
+<style>
+<!--
+/*
+pre { color:#000000; background-color:#ffffff; }
+body { font-family:monospace; color:#000000; background-color:#ffffff; }
+.Type { color:#008000; }
+.Identifier { color:#008080; }
+.Constant { color:#c00000; }
+*/
+body { color:#000; background-color:#fff; }
+code { border:1px solid #000; }
+pre { border:1px solid #100401; margin-right:20%; }
+.Special { color:#cfa796; }
+.Statement { color:#d0c010; }
+.Type { color:#47cf7f; }
+.PreProc { color:#2fa7df; }
+.Constant { color:#ff40ff; }
+table, tr, td { border:0px; }
+-->
+</style>
+</head>
+<body>
+<h1>xmgk - tutorial - composite</h1>
+
+<p>compositing</p>
+
+<table>
+<tr>
+<td>
+
+<img style='border:1px solid #000;' src='./ressources/img-53.1.png' alt='multiply' />
+
+</td>
+<td>
+
+<img style='border:1px solid #000;' src='./ressources/img-51.2.png' alt='' />
+
+</td>
+</tr>
+<tr>
+<td>
+
+<pre style="font-size:0.96em;">
+<span class="Identifier">&lt;</span><span class="Identifier">msl</span><span class="Identifier">&gt;</span>
+  <span class="Identifier">&lt;</span><span class="Identifier">set</span><span class="Identifier"> </span><span class="Type">val</span>=<span class="Constant">'COMP'</span><span class="Identifier"> </span><span class="Type">of</span>=<span class="Constant">'multiply'</span><span class="Identifier"> /&gt;</span>
+  <span class="Identifier">&lt;</span><span class="Identifier">print</span><span class="Identifier"> </span><span class="Type">put</span>=<span class="Constant">&quot;# composite '%[COMP]'&quot;</span><span class="Identifier"> /&gt;</span>
+  <span class="Identifier">&lt;</span><span class="Identifier">image</span><span class="Identifier">&gt;</span>
+    <span class="Identifier">&lt;</span><span class="Identifier">merge</span><span class="Identifier">&gt;</span>
+      <span class="Identifier">&lt;</span><span class="Identifier">layer</span><span class="Identifier">&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">new</span><span class="Identifier"> </span><span class="Type">w</span>=<span class="Constant">'190'</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'190'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'255,255,255'</span><span class="Identifier"> /&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">draw_rectangle</span><span class="Identifier"> </span><span class="Type">pos</span>=<span class="Constant">'0,0'</span><span class="Identifier"> </span><span class="Type">dims</span>=<span class="Constant">'50,70'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'0,0,255'</span><span class="Identifier"> /&gt;</span>
+      <span class="Identifier">&lt;/</span><span class="Identifier">layer</span><span class="Identifier">&gt;</span>
+      <span class="Identifier">&lt;</span><span class="Identifier">layer</span><span class="Identifier"> </span><span class="Type">compose</span>=<span class="Constant">'%[COMP]'</span><span class="Identifier">&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">new</span><span class="Identifier"> </span><span class="Type">w</span>=<span class="Constant">'190'</span><span class="Identifier"> </span><span class="Type">h</span>=<span class="Constant">'190'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'255,255,255'</span><span class="Identifier"> /&gt;</span>
+        <span class="Identifier">&lt;</span><span class="Identifier">draw_rectangle</span><span class="Identifier"> </span><span class="Type">pos</span>=<span class="Constant">'40,10'</span><span class="Identifier"> </span><span class="Type">dims</span>=<span class="Constant">'40,40'</span><span class="Identifier"> </span><span class="Type">rgb</span>=<span class="Constant">'255,0,0'</span><span class="Identifier"> /&gt;</span>
+      <span class="Identifier">&lt;/</span><span class="Identifier">layer</span><span class="Identifier">&gt;</span>
+    <span class="Identifier">&lt;/</span><span class="Identifier">merge</span><span class="Identifier">&gt;</span>
+  <span class="Identifier">&lt;/</span><span class="Identifier">image</span><span class="Identifier">&gt;</span>
+  <span class="Identifier">&lt;</span><span class="Identifier">display</span><span class="Identifier"> /&gt;</span>
+  <span class="Identifier">&lt;</span><span class="Identifier">write</span><span class="Identifier"> </span><span class="Type">filename</span>=<span class="Constant">'img-53.1.png'</span><span class="Identifier"> /&gt;</span>
+<span class="Identifier">&lt;/</span><span class="Identifier">msl</span><span class="Identifier">&gt;</span>
+</pre>
+
+</td>
+<td>
+
+<pre>
+</pre>
+
+</td>
+</tr>
+</table>
+
+<!--
+-->
+
+<p><a href="./tut-xmgk-17.html">&lt;-</a> / -&gt;</p>
+
+</body>
+</html>
