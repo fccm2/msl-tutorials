@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>module5.mli</title>
+<meta name="Generator" content="Vim/9.1" />
+<meta name="plugin-version" content="vim9.0_v2" />
+<meta name="syntax" content="ocaml" />
+<meta name="settings" content="use_css,no_foldcolumn,expand_tabs,pre_wrap,prevent_copy=,use_input_for_pc=none" />
+<meta name="colorscheme" content="pablo" />
+<style>
+<!--
+pre { border:1px solid #171410; margin:2px; }
+pre { white-space: pre-wrap; font-family: monospace; color: #ffffff; background-color: #000000; }
+body { font-family: monospace; color: #ffffff; background-color: #000000; }
+* { font-size: 1em; }
+a { color: inherit; }
+.Statement { color: #afaf00; font-weight: bold; }
+.Comment { color: #808080; }
+.PreProc { color: #00ff00; }
+.Type { color: #00af00; }
+-->
+</style>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="Comment">(** Xmgk *)</span>
+<span class="Comment">(** {4 module Xmgk} *)</span>
+<span class="Statement">module</span><span class="PreProc"> Xmgk</span> <span class="Statement">:</span> <span class="PreProc">sig</span>
+  <span class="Statement">type</span> rgb = <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span>
+  <span class="Statement">type</span> coord = Relative | Absolute
+  <span class="Statement">type</span> stroke = rgb <span class="Statement">*</span> <span class="Type">float</span>
+  <span class="Statement">type</span> path_new = Path <span class="Statement">of</span> coord <span class="Statement">*</span> rgb <span class="Type">option</span> <span class="Statement">*</span> stroke <span class="Type">option</span>
+
+  <span class="Statement">type</span> layers_closed
+
+  <span class="Statement">type</span> image_uninitialized
+  <span class="Statement">type</span> image
+  <span class="Statement">type</span> image_closed
+
+  <span class="Statement">type</span> prim =
+    | New <span class="Statement">of</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span> <span class="Statement">*</span> rgb
+    | Img <span class="Statement">of</span> <span class="Type">string</span>
+    | Layer <span class="Statement">of</span> layers_closed
+
+  <span class="Statement">val</span> new_image <span class="Statement">:</span> <span class="Type">unit</span> <span class="Statement">-&gt;</span> image_uninitialized
+  <span class="Statement">val</span> close_image <span class="Statement">:</span> image <span class="Statement">-&gt;</span> image_closed
+
+  <span class="Statement">val</span> image_add_prim <span class="Statement">:</span> prim <span class="Statement">-&gt;</span> image_uninitialized <span class="Statement">-&gt;</span> image
+
+  <span class="Statement">type</span> filter
+  <span class="Statement">val</span> image_add_filter <span class="Statement">:</span> filter <span class="Statement">-&gt;</span> image <span class="Statement">-&gt;</span> image
+
+  <span class="Statement">val</span> display <span class="Statement">:</span> filter
+  <span class="Statement">val</span> write <span class="Statement">:</span> <span class="Type">string</span> <span class="Statement">-&gt;</span> filter
+
+  <span class="Statement">type</span> msl
+  <span class="Statement">type</span> msl_closed
+
+  <span class="Statement">val</span> new_msl <span class="Statement">:</span> <span class="Type">unit</span> <span class="Statement">-&gt;</span> msl
+  <span class="Statement">val</span> close_msl <span class="Statement">:</span> msl <span class="Statement">-&gt;</span> msl_closed
+
+  <span class="Statement">val</span> msl_add_image <span class="Statement">:</span> image_closed <span class="Statement">-&gt;</span> msl <span class="Statement">-&gt;</span> msl
+  <span class="Statement">val</span> msl_print <span class="Statement">:</span> msl_closed <span class="Statement">-&gt;</span> <span class="Type">unit</span>
+
+  <span class="Statement">type</span> path
+  <span class="Statement">val</span> new_path <span class="Statement">:</span> path_new <span class="Statement">-&gt;</span> path
+  <span class="Statement">val</span> path_close <span class="Statement">:</span> path <span class="Statement">-&gt;</span> filter
+
+  <span class="Statement">type</span> path_elem =
+    | Move_to <span class="Statement">of</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span>
+    | Line_to <span class="Statement">of</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span>
+    | H_line_to <span class="Statement">of</span> <span class="Type">int</span>
+    | V_line_to <span class="Statement">of</span> <span class="Type">int</span>
+    | Quad_curve_to <span class="Statement">of</span> <span class="Statement">(</span><span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span><span class="Statement">)</span> <span class="Statement">*</span> <span class="Statement">(</span><span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span><span class="Statement">)</span>
+    | Cubic_curve_to <span class="Statement">of</span> <span class="Statement">(</span><span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span><span class="Statement">)</span> <span class="Statement">*</span> <span class="Statement">(</span><span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span><span class="Statement">)</span> <span class="Statement">*</span> <span class="Statement">(</span><span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span><span class="Statement">)</span>
+    | Close_path
+
+  <span class="Statement">val</span> path_add_elem <span class="Statement">:</span> path_elem <span class="Statement">-&gt;</span> path <span class="Statement">-&gt;</span> path
+
+  <span class="Statement">val</span> blur <span class="Statement">:</span> <span class="Type">float</span> <span class="Statement">-&gt;</span> <span class="Type">float</span> <span class="Statement">-&gt;</span> filter
+  <span class="Statement">val</span> edge <span class="Statement">:</span> <span class="Type">float</span> <span class="Statement">-&gt;</span> filter
+  <span class="Statement">val</span> negate <span class="Statement">:</span> filter
+  <span class="Statement">val</span> charcoal <span class="Statement">:</span> <span class="Type">float</span> <span class="Statement">-&gt;</span> <span class="Type">float</span> <span class="Statement">-&gt;</span> filter
+  <span class="Statement">val</span> modulate <span class="Statement">:</span> <span class="Type">int</span> <span class="Statement">-&gt;</span> <span class="Type">int</span> <span class="Statement">-&gt;</span> <span class="Type">int</span> <span class="Statement">-&gt;</span> filter
+
+  <span class="Statement">val</span> emboss <span class="Statement">:</span> <span class="Type">float</span> <span class="Statement">-&gt;</span> <span class="Type">float</span> <span class="Statement">-&gt;</span> filter
+  <span class="Statement">val</span> shade <span class="Statement">:</span> <span class="Type">float</span> <span class="Statement">-&gt;</span> <span class="Type">float</span> <span class="Statement">-&gt;</span> filter
+
+  <span class="Statement">val</span> despeckle <span class="Statement">:</span> filter
+  <span class="Statement">val</span> noise <span class="Statement">:</span> <span class="Type">float</span> <span class="Statement">-&gt;</span> filter
+  <span class="Statement">val</span> roll <span class="Statement">:</span> <span class="Type">int</span> <span class="Statement">-&gt;</span> <span class="Type">int</span> <span class="Statement">-&gt;</span> filter
+
+  <span class="Statement">val</span> brightness <span class="Statement">:</span> <span class="Type">int</span> <span class="Statement">-&gt;</span> filter
+  <span class="Statement">val</span> saturation <span class="Statement">:</span> <span class="Type">int</span> <span class="Statement">-&gt;</span> filter
+  <span class="Statement">val</span> hue <span class="Statement">:</span> <span class="Type">int</span> <span class="Statement">-&gt;</span> filter
+
+  <span class="Statement">val</span> draw_rectangle <span class="Statement">:</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span> <span class="Statement">-&gt;</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span> <span class="Statement">-&gt;</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span> <span class="Statement">-&gt;</span> filter
+  <span class="Statement">val</span> draw_circle <span class="Statement">:</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span> <span class="Statement">-&gt;</span> <span class="Type">int</span> <span class="Statement">-&gt;</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span> <span class="Statement">-&gt;</span> filter
+
+  <span class="Statement">val</span> stroke_rectangle <span class="Statement">:</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span> <span class="Statement">-&gt;</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span> <span class="Statement">-&gt;</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span> <span class="Statement">-&gt;</span> <span class="Type">float</span> <span class="Statement">-&gt;</span> filter
+  <span class="Statement">val</span> stroke_circle <span class="Statement">:</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span> <span class="Statement">-&gt;</span> <span class="Type">int</span> <span class="Statement">-&gt;</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span> <span class="Statement">-&gt;</span> <span class="Type">float</span> <span class="Statement">-&gt;</span> filter
+
+  <span class="Comment">(*</span>
+<span class="Comment">  type layer</span>
+<span class="Comment">  type primary_layer</span>
+<span class="Comment">  type layer_closed</span>
+<span class="Comment">  *)</span>
+  <span class="Statement">type</span> layed
+  <span class="Statement">type</span> primary
+
+  <span class="Statement">type</span> 'a layer
+  <span class="Statement">type</span> 'a layer_closed
+  <span class="Statement">type</span> layers_list
+
+  <span class="Statement">val</span> new_layer_prim <span class="Statement">:</span> <span class="Type">unit</span> <span class="Statement">-&gt;</span> primary layer
+  <span class="Statement">val</span> new_layer <span class="Statement">:</span> <span class="Type">string</span> <span class="Statement">-&gt;</span> layed layer
+  <span class="Statement">val</span> close_layer <span class="Statement">:</span> 'a layer <span class="Statement">-&gt;</span> 'a layer_closed
+
+  <span class="Statement">val</span> new_layers_list <span class="Statement">:</span> primary layer_closed <span class="Statement">-&gt;</span> layers_list
+
+  <span class="Statement">val</span> layer_list_add_layer <span class="Statement">:</span> layed layer_closed <span class="Statement">-&gt;</span> layers_list <span class="Statement">-&gt;</span> layers_list
+
+  <span class="Statement">val</span> layers_close <span class="Statement">:</span> layers_list <span class="Statement">-&gt;</span> layers_closed
+
+  <span class="Statement">val</span> layer_add_prim <span class="Statement">:</span> prim <span class="Statement">-&gt;</span> 'a layer <span class="Statement">-&gt;</span> 'a layer
+
+  <span class="Statement">val</span> layer_add_filter <span class="Statement">:</span> filter <span class="Statement">-&gt;</span> 'a layer <span class="Statement">-&gt;</span> 'a layer
+
+  <span class="Comment">(*</span>
+<span class="Comment">  type layers =</span>
+<span class="Comment">    | Laying of (prim * filter list) * (prim * string * filter list) list</span>
+<span class="Comment">  *)</span>
+
+  <span class="Statement">type</span> layers =
+    | Laying <span class="Statement">of</span> <span class="Statement">(</span>layers <span class="Statement">*</span> filter <span class="Type">list</span><span class="Statement">)</span> <span class="Statement">*</span> <span class="Statement">(</span>layers <span class="Statement">*</span> <span class="Type">string</span> <span class="Statement">*</span> filter <span class="Type">list</span><span class="Statement">)</span> <span class="Type">list</span>
+    | Prim <span class="Statement">of</span> <span class="Type">int</span> <span class="Statement">*</span> <span class="Type">int</span> <span class="Statement">*</span> rgb
+
+  <span class="Statement">val</span> image_of_layers <span class="Statement">:</span> layers <span class="Statement">-&gt;</span> filter <span class="Type">list</span> <span class="Statement">-&gt;</span> msl_closed
+
+<span class="PreProc">end</span>
+</pre>
+</body>
+</html>

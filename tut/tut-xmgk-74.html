@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>xmgk - tutorial - </title>
+<title>xmgk - tutorial - laying</title>
 <style>
 <!--
 /*
@@ -24,12 +24,27 @@ table, tr, td { border:0px; }
 </style>
 </head>
 <body>
-<h1>xmgk - tutorial - </h1>
+<h1>xmgk - tutorial - laying</h1>
 
 <!--
 -->
 
+<p><code><a href='./ressources/mod5.ml.html'>module5</a></code></p>
+
 <pre>
+module Xmgk = Module5.Xmgk
+let m () =
+  let layer0 = Xmgk.Prim (150, 100, (127, 127, 255)) in
+  let layer0 = (layer0, []) in
+
+  let layer1 = Xmgk.Prim (150, 100, (255, 255, 255)) in
+  let layer1 = (layer1, "multiply", []) in
+
+  let layers = Xmgk.Laying (layer0, [layer1]) in
+
+  let img = Xmgk.image_of_layers layers [Xmgk.display] in
+  Xmgk.msl_print img;
+;;
 </pre>
 
 <p><a href="./tut-xmgk-73.html">&lt;-</a> /
