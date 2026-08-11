@@ -47,6 +47,14 @@ let m () =
 ;;
 </pre>
 
+<pre>
+   type layers =
+     | Laying of (layers * filter list) * (layers * string * filter list) list
+     | Prim of int * int * rgb
+
+   val image_of_layers : layers -&gt; filter list -&gt; msl_closed
+</pre>
+
 <p><a href="./tut-xmgk-73.html">&lt;-</a> /
 <a href="./tut-xmgk-75.html"></a>-&gt;</p>
 
