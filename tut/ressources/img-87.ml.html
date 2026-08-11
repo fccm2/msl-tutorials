@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>mgk-gen-msl-0.01.7t/msl/img-87.ml</title>
+<meta name="Generator" content="Vim/9.1">
+<meta name="plugin-version" content="vim9.0_v2">
+<meta name="syntax" content="ocaml">
+<meta name="settings" content="use_css,no_foldcolumn,expand_tabs,pre_wrap,prevent_copy=,use_input_for_pc=none">
+<meta name="colorscheme" content="pablo">
+<style>
+<!--
+pre { border:1px solid #171410; margin:2px; }
+pre { white-space: pre-wrap; font-family: monospace; color: #ffffff; background-color: #000000; }
+body { font-family: monospace; color: #ffffff; background-color: #000000; }
+* { font-size: 1em; }
+a { color: inherit; }
+.Statement { color: #afaf00; font-weight: bold; }
+.PreProc { color: #00ff00; }
+.Constant { color: #00ffff; }
+.Comment { color: #808080; }
+-->
+</style>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="PreProc">#load</span> <span class="Constant">&quot;module.cma&quot;</span>
+<span class="Statement">open</span> <span class="PreProc">Module</span>
+<span class="Statement">let</span> over_layer cl <span class="Statement">=</span>
+  <span class="Statement">let</span> ng <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.negate <span class="Statement">in</span>
+  <span class="Statement">let</span> l1 <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.new_layer <span class="Constant">&quot;lighten&quot;</span> <span class="Statement">in</span>
+  <span class="Statement">let</span> l1 <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.layer_add_prim <span class="Statement">(</span><span class="Constant">New</span><span class="Statement">(</span><span class="Constant">500</span>, <span class="Constant">400</span>, <span class="Statement">(</span><span class="Constant">255</span>, <span class="Constant">255</span>, <span class="Constant">255</span><span class="Statement">)))</span> l1 <span class="Statement">in</span>
+  <span class="Statement">let</span> l1 <span class="Statement">=</span>
+    <span class="PreProc">List</span>.fold_left <span class="Statement">(</span><span class="Statement">fun</span> l1 <span class="Statement">((</span>x, y<span class="Statement">)</span>, r<span class="Statement">)</span> <span class="Statement">-&gt;</span>
+      <span class="Statement">let</span> cr <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.draw_circle <span class="Statement">(</span>x, y<span class="Statement">)</span> r <span class="Statement">(</span><span class="Constant">0</span>, <span class="Constant">0</span>, <span class="Constant">0</span><span class="Statement">)</span> <span class="Statement">in</span>
+      <span class="Statement">let</span> l1 <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.layer_add_filter cr l1 <span class="Statement">in</span>
+      l1
+    <span class="Statement">)</span> l1 cl
+  <span class="Statement">in</span>
+  <span class="Statement">let</span> l1 <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.layer_add_filter <span class="Statement">(</span><span class="PreProc">Xmgk</span>.blur <span class="Constant">1.1</span> <span class="Constant">1.2</span><span class="Statement">)</span> l1 <span class="Statement">in</span>
+  <span class="Statement">let</span> l1 <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.layer_add_filter ng l1 <span class="Statement">in</span>
+  <span class="Statement">let</span> l1 <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.close_layer l1 <span class="Statement">in</span>
+  l1
+<span class="Statement">let</span> blured_layer cl <span class="Statement">=</span>
+  <span class="Statement">let</span> xd, yd <span class="Statement">=</span> <span class="Statement">(</span><span class="Constant">-2</span>, <span class="Constant">2</span><span class="Statement">)</span> <span class="Statement">in</span>
+  <span class="Statement">let</span> ls <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.new_layer_prim <span class="Constant">()</span> <span class="Statement">in</span>
+  <span class="Statement">let</span> ls <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.layer_add_prim <span class="Statement">(</span><span class="Constant">New</span><span class="Statement">(</span><span class="Constant">500</span>, <span class="Constant">400</span>, <span class="Statement">(</span><span class="Constant">255</span>, <span class="Constant">255</span>, <span class="Constant">255</span><span class="Statement">)))</span> ls <span class="Statement">in</span>
+  <span class="Statement">let</span> ls <span class="Statement">=</span>
+    <span class="PreProc">List</span>.fold_left <span class="Statement">(</span><span class="Statement">fun</span> ls <span class="Statement">((</span>x, y<span class="Statement">)</span>, r<span class="Statement">)</span> <span class="Statement">-&gt;</span>
+      <span class="Statement">let</span> cs <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.draw_circle <span class="Statement">(</span>x+xd, y+yd<span class="Statement">)</span> r <span class="Statement">(</span><span class="Constant">0</span>, <span class="Constant">0</span>, <span class="Constant">105</span><span class="Statement">)</span> <span class="Statement">in</span>
+      <span class="Statement">let</span> ls <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.layer_add_filter cs ls <span class="Statement">in</span>
+      ls
+    <span class="Statement">)</span> ls cl
+  <span class="Statement">in</span>
+  <span class="Statement">let</span> ls <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.layer_add_filter <span class="Statement">(</span><span class="PreProc">Xmgk</span>.blur <span class="Constant">7.5</span> <span class="Constant">10.2</span><span class="Statement">)</span> ls <span class="Statement">in</span>
+  <span class="Statement">let</span> ls <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.close_layer ls <span class="Statement">in</span>
+  ls
+<span class="Statement">let</span> build_prim d <span class="Statement">=</span>
+  <span class="Statement">let</span> <span class="Statement">rec</span> aux_prim d ac <span class="Statement">=</span>
+    <span class="Statement">if</span> d &lt;= <span class="Constant">0</span> <span class="Statement">then</span> <span class="PreProc">List</span>.rev<span class="Statement">(</span>ac<span class="Statement">)</span> <span class="Statement">else</span>
+    <span class="Statement">let</span> x, y <span class="Statement">=</span> <span class="Constant">5</span> + <span class="PreProc">Random</span>.int <span class="Statement">(</span><span class="Constant">500-2</span>*<span class="Constant">5</span><span class="Statement">)</span>, <span class="Constant">5</span> + <span class="PreProc">Random</span>.int <span class="Statement">(</span><span class="Constant">400-2</span>*<span class="Constant">5</span><span class="Statement">)</span> <span class="Statement">in</span>
+    <span class="Statement">let</span> c <span class="Statement">=</span> <span class="Constant">5</span> + <span class="PreProc">Random</span>.int <span class="Statement">(</span><span class="Constant">65</span><span class="Statement">)</span> <span class="Statement">in</span>
+    aux_prim <span class="Statement">(</span>d<span class="Constant">-1</span><span class="Statement">)</span> <span class="Statement">(((</span>x, y<span class="Statement">)</span>, c<span class="Statement">)</span>::ac<span class="Statement">)</span>
+  <span class="Statement">in</span>
+  aux_prim d <span class="Constant">[]</span>
+<span class="Statement">let</span> prim_layer <span class="Constant">()</span> <span class="Statement">=</span>
+  <span class="Statement">let</span> lp <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.new_layer_prim <span class="Constant">()</span> <span class="Statement">in</span>
+  <span class="Comment">(*</span>
+<span class="Comment">  *)</span>
+  <span class="Statement">let</span> lp <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.layer_add_prim <span class="Statement">(</span><span class="Constant">New</span><span class="Statement">(</span><span class="Constant">500</span>, <span class="Constant">400</span>, <span class="Statement">(</span><span class="Constant">25</span>, <span class="Constant">55</span>, <span class="Constant">196</span><span class="Statement">)))</span> lp <span class="Statement">in</span>
+  <span class="Statement">let</span> lp <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.layer_add_filter <span class="Statement">(</span><span class="PreProc">Xmgk</span>.noise <span class="Constant">3.4</span><span class="Statement">)</span> lp <span class="Statement">in</span>
+  <span class="Statement">let</span> lp <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.layer_add_filter <span class="Statement">(</span><span class="PreProc">Xmgk</span>.blur <span class="Constant">0.1</span> <span class="Constant">0.2</span><span class="Statement">)</span> lp <span class="Statement">in</span>
+  <span class="Comment">(*</span>
+<span class="Comment">  let lp = Xmgk.layer_add_prim (New(500, 400, (93, 9, 29))) lp in</span>
+<span class="Comment">  let lp = Xmgk.layer_add_filter (Xmgk.noise 3.1) lp in</span>
+<span class="Comment">  let lp = Xmgk.layer_add_filter (Xmgk.blur 0.2 0.3) lp in</span>
+<span class="Comment">  *)</span>
+  <span class="Statement">let</span> lp <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.close_layer lp <span class="Statement">in</span>
+  <span class="Statement">let</span> lt <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.new_layers_list lp <span class="Statement">in</span>
+  <span class="Statement">let</span> lt <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.layers_close lt <span class="Statement">in</span>
+  lt
+<span class="Statement">;;</span>
+<span class="Statement">let</span> <span class="Constant">()</span> <span class="Statement">=</span>
+  <span class="PreProc">Random</span>.self_init <span class="Constant">()</span><span class="Statement">;</span>
+  <span class="Statement">let</span> msl <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.new_msl <span class="Constant">()</span> <span class="Statement">in</span>
+  <span class="Statement">let</span> image <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.new_image <span class="Constant">()</span> <span class="Statement">in</span>
+
+  <span class="Comment">(*</span>
+<span class="Comment">  let ll = prim_layer () in</span>
+
+<span class="Comment">  let cl = build_prim 19 in</span>
+<span class="Comment">  let ls = blured_layer cl in</span>
+<span class="Comment">  let l1 = over_layer cl in</span>
+
+<span class="Comment">  let lt = Xmgk.new_layers_list ll in</span>
+<span class="Comment">  let lt = Xmgk.layer_list_add_layer ls lt in</span>
+<span class="Comment">  let lt = Xmgk.layer_list_add_layer l1 lt in</span>
+<span class="Comment">  let lt = Xmgk.layers_close lt in</span>
+
+<span class="Comment">  let image = Xmgk.image_add_prim (Layer lt) image in</span>
+<span class="Comment">  *)</span>
+
+  <span class="Comment">(*</span>
+<span class="Comment">  let lt = prim_layer () in</span>
+
+<span class="Comment">  let image = Xmgk.image_add_prim (Layer lt) image in</span>
+<span class="Comment">  *)</span>
+
+  <span class="Statement">let</span> cl <span class="Statement">=</span> build_prim <span class="Constant">21</span> <span class="Statement">in</span>
+  <span class="Statement">let</span> ls <span class="Statement">=</span> blured_layer cl <span class="Statement">in</span> <span class="Comment">(* blured *)</span>
+  <span class="Statement">let</span> l1 <span class="Statement">=</span> over_layer cl <span class="Statement">in</span> <span class="Comment">(* over *)</span>
+
+  <span class="Statement">let</span> lt <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.new_layers_list ls <span class="Statement">in</span>
+  <span class="Statement">let</span> lt <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.layer_list_add_layer l1 lt <span class="Statement">in</span>
+  <span class="Statement">let</span> lt <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.layers_close lt <span class="Statement">in</span>
+
+  <span class="Comment">(**)</span>
+
+  <span class="Statement">let</span> l5 <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.new_layer <span class="Constant">&quot;multiply&quot;</span> <span class="Statement">in</span>
+  <span class="Statement">let</span> l5 <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.layer_add_prim <span class="Statement">(</span><span class="Constant">Layer</span> lt<span class="Statement">)</span> l5 <span class="Statement">in</span>
+  <span class="Statement">let</span> l5 <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.close_layer l5 <span class="Statement">in</span>
+
+  <span class="Comment">(**)</span>
+
+  <span class="Statement">let</span> lt1 <span class="Statement">=</span> prim_layer <span class="Constant">()</span> <span class="Statement">in</span> <span class="Comment">(* noise *)</span>
+
+  <span class="Statement">let</span> l4 <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.new_layer_prim <span class="Constant">()</span> <span class="Statement">in</span>
+  <span class="Statement">let</span> l4 <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.layer_add_prim <span class="Statement">(</span><span class="Constant">Layer</span> lt1<span class="Statement">)</span> l4 <span class="Statement">in</span>
+  <span class="Statement">let</span> l4 <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.close_layer l4 <span class="Statement">in</span>
+
+  <span class="Comment">(*</span>
+<span class="Comment">  let ol = Xmgk.new_layer &quot;multiply&quot; in</span>
+<span class="Comment">  *)</span>
+
+  <span class="Statement">let</span> lt4 <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.new_layers_list l4 <span class="Statement">in</span>
+  <span class="Statement">let</span> lt4 <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.layer_list_add_layer l5 <span class="Comment">(* layed layer_closed *)</span> lt4 <span class="Statement">in</span>
+  <span class="Statement">let</span> lt4 <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.layers_close lt4 <span class="Statement">in</span>
+
+  <span class="Comment">(**)</span>
+
+  <span class="Statement">let</span> image <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.image_add_prim <span class="Statement">(</span><span class="Constant">Layer</span> lt4<span class="Statement">)</span> image <span class="Statement">in</span>
+
+  <span class="Comment">(**)</span>
+
+  <span class="Statement">let</span> image <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.image_add_filter <span class="Statement">(</span><span class="PreProc">Xmgk</span>.display<span class="Statement">)</span> image <span class="Statement">in</span>
+
+  <span class="Statement">let</span> closed_image <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.close_image image <span class="Statement">in</span>
+  <span class="Statement">let</span> msl <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.msl_add_image closed_image msl <span class="Statement">in</span>
+  <span class="Statement">let</span> closed_msl <span class="Statement">=</span> <span class="PreProc">Xmgk</span>.close_msl msl <span class="Statement">in</span>
+  <span class="PreProc">Xmgk</span>.msl_print closed_msl<span class="Statement">;</span>
+<span class="Statement">;;</span>
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->
