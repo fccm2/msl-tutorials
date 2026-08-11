@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>xmgk - tutorial - randomizer</title>
+<style>
+<!--
+/*
+pre { color:#000000; background-color:#ffffff; }
+body { font-family:monospace; color:#000000; background-color:#ffffff; }
+.Type { color:#008000; }
+.Identifier { color:#008080; }
+.Constant { color:#c00000; }
+*/
+body { color:#000; background-color:#fff; }
+code { border:1px solid #000; }
+pre { border:1px solid #100401; margin-right:20%; }
+.Special { color:#cfa796; }
+.Statement { color:#d0c010; }
+.Type { color:#47cf7f; }
+.PreProc { color:#2fa7df; }
+.Constant { color:#ff40ff; }
+table, tr, td { border:0px; }
+-->
+</style>
+</head>
+<body>
+<h1>xmgk - tutorial - randomizer</h1>
+
+<!--
+-->
+
+<p><code>./ppptz.opt</code></p>
+
+<pre>
+$ cat rnd-1.xml
+&lt;tag prm='_10,11:-2+3:-5+7' /&gt;
+</pre>
+
+<pre>
+$ ./ppptz.opt rnd-1.xml
+&lt;tag prm="13,6" /&gt;
+&lt;tag prm="10,9" /&gt;
+&lt;tag prm="10,8" /&gt;
+&lt;tag prm="11,15" /&gt;
+&lt;tag prm="11,6" /&gt;
+&lt;tag prm="13,10" /&gt;
+&lt;tag prm="11,9" /&gt;
+&lt;tag prm="11,18" /&gt;
+&lt;tag prm="12,7" /&gt;
+&lt;tag prm="9,9" /&gt;
+&lt;tag prm="12,6" /&gt;
+</pre>
+
+<pre>
+$ cat rnd-0.xml
+&lt;tag prm='_11:-1+2' /&gt;
+</pre>
+
+<pre>
+$ ./ppprz.opt rnd-0.xml
+&lt;tag prm="10" /&gt;
+&lt;tag prm="10" /&gt;
+&lt;tag prm="13" /&gt;
+&lt;tag prm="10" /&gt;
+&lt;tag prm="12" /&gt;
+&lt;tag prm="11" /&gt;
+&lt;tag prm="12" /&gt;
+&lt;tag prm="10" /&gt;
+&lt;tag prm="11" /&gt;
+</pre>
+
+
+<p><a href="./tut-xmgk-66.html">&lt;-</a> / -&gt;</p>
+
+</body>
+</html>

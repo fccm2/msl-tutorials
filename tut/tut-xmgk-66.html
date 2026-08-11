@@ -1,0 +1,158 @@
+<html>
+<head>
+<title>xmgk - tutorial - randomize</title>
+<style>
+<!--
+/*
+pre { color:#000000; background-color:#ffffff; }
+body { font-family:monospace; color:#000000; background-color:#ffffff; }
+.Type { color:#008000; }
+.Identifier { color:#008080; }
+.Constant { color:#c00000; }
+*/
+body { color:#000; background-color:#fff; }
+code { border:1px solid #000; }
+pre { border:1px solid #100401; margin-right:20%; }
+.Special { color:#cfa796; }
+.Statement { color:#d0c010; }
+.Type { color:#47cf7f; }
+.PreProc { color:#2fa7df; }
+.Constant { color:#ff40ff; }
+table, tr, td { border:0px; }
+-->
+</style>
+</head>
+<body>
+<h1>xmgk - tutorial - randomize</h1>
+
+<table>
+<tr>
+<td><img src='./ressources/img-97.gif' /></td>
+<td><img src='./ressources/img-97b.gif' /></td>
+</tr>
+</table>
+
+<!--
+-->
+
+<pre>
+./pppo5.opt img-97.xml | ./ppptz.opt - | ./xmgk.opt -
+</pre>
+
+<pre>
+&lt;msl&gt;
+  &lt;image&gt;
+    &lt;merge&gt;
+      &lt;layer&gt;
+        &lt;new w='170' h='170' rgb='255,255,255' /&gt;
+        &lt;for val='X' of='20 50 80 110'&gt;
+          &lt;for val='Y' of='20 50 80 110'&gt;
+            &lt;draw_circle c='_%[X],%[Y]:-3+3:-3+3' r='_15:-1+1' rgba='_0,0,127,96:-0+1:-0+1:-3+7:-3+4' /&gt;
+            &lt;draw_circle c='_%[X],%[Y]:-2+2:-2+2' r='_15:-1+1' rgb_stroke='0,0,95' stroke_width='2.0' /&gt;
+          &lt;/for&gt;
+        &lt;/for&gt;
+      &lt;/layer&gt;
+    &lt;/merge&gt;
+  &lt;/image&gt;
+  &lt;display /&gt;
+&lt;/msl&gt;
+</pre>
+
+
+<pre>
+&lt;msl&gt;
+&lt;image&gt;
+&lt;merge&gt;
+&lt;layer&gt;
+&lt;new w="170" h="170" rgb="255,255,255" /&gt;
+&lt;draw_circle c="21,19" r="15" rgba="1,1,127,96" /&gt;
+&lt;draw_circle c="22,20" r="16" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="23,48" r="16" rgba="0,0,125,97" /&gt;
+&lt;draw_circle c="22,49" r="14" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="23,79" r="16" rgba="0,1,132,97" /&gt;
+&lt;draw_circle c="18,80" r="15" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="23,108" r="14" rgba="1,0,130,95" /&gt;
+&lt;draw_circle c="20,109" r="16" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="50,21" r="15" rgba="0,0,128,98" /&gt;
+&lt;draw_circle c="49,18" r="14" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="53,53" r="16" rgba="1,0,129,93" /&gt;
+&lt;draw_circle c="51,52" r="14" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="52,82" r="14" rgba="1,1,133,94" /&gt;
+&lt;draw_circle c="52,82" r="15" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="49,109" r="15" rgba="1,1,128,99" /&gt;
+&lt;draw_circle c="50,111" r="14" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="83,20" r="14" rgba="0,0,134,98" /&gt;
+&lt;draw_circle c="79,22" r="14" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="81,52" r="16" rgba="0,1,126,100" /&gt;
+&lt;draw_circle c="79,52" r="15" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="80,80" r="14" rgba="0,0,131,96" /&gt;
+&lt;draw_circle c="80,81" r="16" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="78,113" r="16" rgba="0,1,132,98" /&gt;
+&lt;draw_circle c="82,108" r="14" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="108,19" r="14" rgba="0,1,127,94" /&gt;
+&lt;draw_circle c="108,22" r="15" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="109,47" r="15" rgba="0,1,127,100" /&gt;
+&lt;draw_circle c="108,48" r="15" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="112,82" r="15" rgba="0,0,131,99" /&gt;
+&lt;draw_circle c="112,81" r="15" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="113,109" r="15" rgba="1,1,129,94" /&gt;
+&lt;draw_circle c="109,108" r="14" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;/layer&gt;
+&lt;/merge&gt;
+&lt;/image&gt;
+&lt;display /&gt;
+&lt;/msl&gt;
+</pre>
+
+
+<pre>
+&lt;msl&gt;
+&lt;image&gt;
+&lt;merge&gt;
+&lt;layer&gt;
+&lt;new w="170" h="170" rgb="255,255,255" /&gt;
+&lt;draw_circle c="_20,20:-3+3:-3+3" r="_15:-1+1" rgba="_0,0,127,96:-0+1:-0+1:-3+7:-3+4" /&gt;
+&lt;draw_circle c="_20,20:-2+2:-2+2" r="_15:-1+1" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="_20,50:-3+3:-3+3" r="_15:-1+1" rgba="_0,0,127,96:-0+1:-0+1:-3+7:-3+4" /&gt;
+&lt;draw_circle c="_20,50:-2+2:-2+2" r="_15:-1+1" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="_20,80:-3+3:-3+3" r="_15:-1+1" rgba="_0,0,127,96:-0+1:-0+1:-3+7:-3+4" /&gt;
+&lt;draw_circle c="_20,80:-2+2:-2+2" r="_15:-1+1" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="_20,110:-3+3:-3+3" r="_15:-1+1" rgba="_0,0,127,96:-0+1:-0+1:-3+7:-3+4" /&gt;
+&lt;draw_circle c="_20,110:-2+2:-2+2" r="_15:-1+1" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="_50,20:-3+3:-3+3" r="_15:-1+1" rgba="_0,0,127,96:-0+1:-0+1:-3+7:-3+4" /&gt;
+&lt;draw_circle c="_50,20:-2+2:-2+2" r="_15:-1+1" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="_50,50:-3+3:-3+3" r="_15:-1+1" rgba="_0,0,127,96:-0+1:-0+1:-3+7:-3+4" /&gt;
+&lt;draw_circle c="_50,50:-2+2:-2+2" r="_15:-1+1" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="_50,80:-3+3:-3+3" r="_15:-1+1" rgba="_0,0,127,96:-0+1:-0+1:-3+7:-3+4" /&gt;
+&lt;draw_circle c="_50,80:-2+2:-2+2" r="_15:-1+1" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="_50,110:-3+3:-3+3" r="_15:-1+1" rgba="_0,0,127,96:-0+1:-0+1:-3+7:-3+4" /&gt;
+&lt;draw_circle c="_50,110:-2+2:-2+2" r="_15:-1+1" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="_80,20:-3+3:-3+3" r="_15:-1+1" rgba="_0,0,127,96:-0+1:-0+1:-3+7:-3+4" /&gt;
+&lt;draw_circle c="_80,20:-2+2:-2+2" r="_15:-1+1" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="_80,50:-3+3:-3+3" r="_15:-1+1" rgba="_0,0,127,96:-0+1:-0+1:-3+7:-3+4" /&gt;
+&lt;draw_circle c="_80,50:-2+2:-2+2" r="_15:-1+1" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="_80,80:-3+3:-3+3" r="_15:-1+1" rgba="_0,0,127,96:-0+1:-0+1:-3+7:-3+4" /&gt;
+&lt;draw_circle c="_80,80:-2+2:-2+2" r="_15:-1+1" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="_80,110:-3+3:-3+3" r="_15:-1+1" rgba="_0,0,127,96:-0+1:-0+1:-3+7:-3+4" /&gt;
+&lt;draw_circle c="_80,110:-2+2:-2+2" r="_15:-1+1" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="_110,20:-3+3:-3+3" r="_15:-1+1" rgba="_0,0,127,96:-0+1:-0+1:-3+7:-3+4" /&gt;
+&lt;draw_circle c="_110,20:-2+2:-2+2" r="_15:-1+1" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="_110,50:-3+3:-3+3" r="_15:-1+1" rgba="_0,0,127,96:-0+1:-0+1:-3+7:-3+4" /&gt;
+&lt;draw_circle c="_110,50:-2+2:-2+2" r="_15:-1+1" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="_110,80:-3+3:-3+3" r="_15:-1+1" rgba="_0,0,127,96:-0+1:-0+1:-3+7:-3+4" /&gt;
+&lt;draw_circle c="_110,80:-2+2:-2+2" r="_15:-1+1" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;draw_circle c="_110,110:-3+3:-3+3" r="_15:-1+1" rgba="_0,0,127,96:-0+1:-0+1:-3+7:-3+4" /&gt;
+&lt;draw_circle c="_110,110:-2+2:-2+2" r="_15:-1+1" rgb_stroke="0,0,95" stroke_width="2.0" /&gt;
+&lt;/layer&gt;
+&lt;/merge&gt;
+&lt;/image&gt;
+&lt;display /&gt;
+&lt;/msl&gt;
+</pre>
+
+
+<p><a href="./tut-xmgk-64.html">&lt;-</a> /
+<a href="./tut-xmgk-67.html">-&gt;</a></p>
+
+</body>
+</html>
