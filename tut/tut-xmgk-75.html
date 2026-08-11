@@ -1,0 +1,88 @@
+<html>
+<head>
+<title>xmgk - tutorial - randomizing</title>
+<style>
+<!--
+/*
+pre { color:#000000; background-color:#ffffff; }
+body { font-family:monospace; color:#000000; background-color:#ffffff; }
+.Type { color:#008000; }
+.Identifier { color:#008080; }
+.Constant { color:#c00000; }
+*/
+body { color:#000; background-color:#fff; }
+code { border:1px solid #000; }
+pre { border:1px solid #100401; margin-right:20%; }
+pre { padding-left:1px; }
+.Special { color:#cfa796; }
+.Statement { color:#d0c010; }
+.Type { color:#47cf7f; }
+.PreProc { color:#2fa7df; }
+.Constant { color:#ff40ff; }
+table, tr, td { border:0px; }
+-->
+</style>
+</head>
+<body>
+<h1>xmgk - tutorial - randomizing</h1>
+
+<img src='./ressources/img-105a.gif' style='border:1px solid #11d;' />
+
+<!--
+-->
+
+<p></p>
+
+<pre>
+&lt;msl&gt;
+  &lt;image&gt;
+    &lt;merge&gt;
+      &lt;layer&gt;
+        &lt;new w='240' h='180' rgb='255,255,255' /&gt;
+        &lt;draw_rectangle pos='0,0' dims='18,170' rgba='0,25,125,127' /&gt;
+      &lt;/layer&gt;
+      &lt;for val='HP' of='29 49 69 89 109'&gt;
+        &lt;layer compose='multiply'&gt;
+          &lt;new w='230' h='170' rgb='255,255,255' /&gt;
+          &lt;path coord='absolute' rgb_stroke='0,0,0' stroke_width='2.1'&gt;
+            &lt;move_to p='_51,%[HP]:-1+1:-1+1' /&gt;
+            &lt;line_to p='_71,%[HP]:-1+1:-1+1' /&gt;
+            &lt;line_to p='_91,%[HP]:-1+1:-1+1' /&gt;
+            &lt;line_to p='_111,%[HP]:-1+1:-1+1' /&gt;
+            &lt;line_to p='_131,%[HP]:-1+1:-1+1' /&gt;
+          &lt;/path&gt;
+        &lt;/layer&gt;
+      &lt;/for&gt;
+    &lt;/merge&gt;
+  &lt;/image&gt;
+&lt;/msl&gt;
+</pre>
+
+<pre style='margin-top:0.4em;'>
+&lt;msl&gt;
+  &lt;image&gt;
+    &lt;merge&gt;
+      &lt;layer&gt;
+        &lt;new w='240' h='180' rgb='255,255,255' /&gt;
+        &lt;draw_rectangle pos='0,0' dims='18,170' rgba='0,25,125,127' /&gt;
+      &lt;/layer&gt;
+      &lt;layer compose='multiply'&gt;
+        &lt;new w='230' h='170' rgb='255,255,255' /&gt;
+        &lt;path coord='absolute' rgb_stroke='0,0,0' stroke_width='2.1'&gt;
+          &lt;move_to p='51,49' /&gt;
+          &lt;line_to p='71,49' /&gt;
+          &lt;line_to p='91,49' /&gt;
+          &lt;line_to p='111,49' /&gt;
+          &lt;line_to p='131,49' /&gt;
+        &lt;/path&gt;
+      &lt;/layer&gt;
+    &lt;/merge&gt;
+  &lt;/image&gt;
+&lt;/msl&gt;
+</pre>
+
+<p><a href="./tut-xmgk-74.html">&lt;-</a> /
+<a href="./tut-xmgk-76.html"></a>-&gt;</p>
+
+</body>
+</html>
