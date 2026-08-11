@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>xmgk - tutorial - circular</title>
+<title>xmgk - tutorial - circular'anim</title>
 <style>
 <!--
 /*
@@ -24,14 +24,21 @@ table, tr, td { border:0px; }
 </style>
 </head>
 <body>
-<h1>xmgk - tutorial - circular</h1>
+<h1>xmgk - tutorial - circular'anim</h1>
 
-<img src='./ressources/img-99.png' style='border:1px solid #125;' />
+<table>
+
+<tr>
+<td> <img src='./ressources/img-99c.gif' style='border:1px solid #125;' /> </td>
+<td> <img src='./ressources/img-99d.gif' style='border:1px solid #125;' /> </td>
+</tr>
+
+</table>
 
 <!--
 -->
 
-<pre>$ cat img-99.xml | ./pppzc.opt - | ./xmgk.opt -</pre>
+<pre>$ cat img-99c.xml | ./ppptr.opt - OFS0=0.110 OFS1=0.790  N=0 | ./pppcs.opt - | ./xmgk.opt -</pre>
 
 <pre>
 &lt;msl&gt;
@@ -39,16 +46,24 @@ table, tr, td { border:0px; }
     &lt;merge&gt;
       &lt;layer&gt;
         &lt;new w='250' h='250' rgb='255,255,255' /&gt;
-        &lt;for_circle v='PT' r='25' c='50,50' n='12'&gt;
-          &lt;draw_rectangle_f pos='%[PT]' dims='5,5' rgba='0,25,195,127' rgb_stroke='0,0,0' stroke_width='1.2' /&gt;
+        &lt;for_circle v='<span style='text-decoration:bold;'>PT0</span>' r='25' c='50,50' n='12' ofs='<span style='text-decoration:underline;'></span>%[OFS0]'&gt;
+          &lt;draw_rectangle_f pos='<span style='text-decoration:underline;'>%[PT0]</span>' dims='5,5' rgba='0,25,195,127' rgb_stroke='0,0,0' stroke_width='1.2' /&gt;
+        &lt;/for_circle&gt;
+      &lt;/layer&gt;
+      &lt;layer compose='multiply'&gt;
+        &lt;new w='250' h='250' rgb='255,255,255' /&gt;
+        &lt;for_circle v='<span style='text-decoration:bold;'>PT1</span>' r='45' c='175,175' n='24' ofs='<span style='text-decoration:underline;'>%[OFS1]</span>'&gt;
+          &lt;draw_rectangle_f pos='<span style='text-decoration:underline;'>%[PT1]</span>' dims='5,5' rgba='0,25,195,127' rgb_stroke='0,0,0' stroke_width='1.2' /&gt;
         &lt;/for_circle&gt;
       &lt;/layer&gt;
     &lt;/merge&gt;
   &lt;/image&gt;
+  &lt;write filename='img-99c.%[N].png' /&gt;
 &lt;/msl&gt;
 </pre>
 
-<p><a href="./tut-xmgk-72.html">&lt;-</a> / -&gt;</p>
+<p><a href="./tut-xmgk-71.html">&lt;-</a> /
+<a href="./tut-xmgk-73.html">-&gt;</a></p>
 
 </body>
 </html>
