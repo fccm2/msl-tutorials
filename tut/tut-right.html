@@ -1,0 +1,108 @@
+<html>
+<head>
+<title>tut - right-side</title>
+<style>
+pre, code { border:1px solid #000; }
+</style>
+</head>
+<body>
+
+<p>how to know if the point on the right<br />
+is really on the right side</p>
+<pre>
+
+   +----------------+
+           (100, 10)
+ 
+        (50, 5)    (75, 5)
+
+     (0, 0)
+   +----------------+
+
+</pre>
+
+<p>one possibility is to map<br />
+one interval onto the other one</p>
+
+<p>we already have the <code>y</code> value<br />
+so we can map the <code>y</code> interval<br />
+onto the <code>x</code> interval</p>
+
+<p>then we only have to compare the<br />
+<code>x</code> values to see if the point<br />
+is really on the right side</p>
+
+<pre>
+let interv_map ys xs (cy) =
+  let ay, by = (ys) in
+  let ax, bx = (xs) in
+  let y_diff = (by - ay) in
+  let x_diff = (bx - ax) in
+  let ry = (cy - ay) in
+  ((ry * x_diff) / y_diff) + ax
+</pre>
+
+<pre>
+let linear_mp (ax, ay) (bx, by) (cx, cy) =
+  let interv_y = (ay, by) in
+  let interv_x = (ax, bx) in
+  let r = interv_map interv_y interv_x (cy) in
+  let dx, dy = r, cy in
+  (dx, dy)
+</pre>
+
+<pre>
+let () =
+  let ax, ay = (0, 0) in
+  let bx, by = (100, 10) in
+  let cx, cy = (75, 5) in
+  let dx, dy = linear_mp (ax, ay) (bx, by) (cx, cy) in
+  Printf.printf "# %d %d\n%!" dx dy;
+;;
+</pre>
+
+<pre>
+$ ocaml right_side.ml
+# 50 5
+</pre>
+
+<pre>
+let linear_ri (ax, ay) (bx, by) (cx, cy) =
+  if ay = by then Stdlib.compare ay cy else
+  let (dx, dy) = linear_mp (ax, ay) (bx, by) (cx, cy) in
+  Stdlib.compare cx dx
+</pre>
+
+<pre>
+let linear_ri (ax, ay) (bx, by) (cx, cy) =
+  if ax = bx &amp;&amp; ay = by then -2 else
+  linear_ri (ax, ay) (bx, by) (cx, cy)
+</pre>
+
+<pre>
+let () =
+  let ax, ay = (0, 0) in
+  let bx, by = (100, 10) in
+  let cx, cy = (75, 5) in
+  let d = linear_ri (ax, ay) (bx, by) (cx, cy) in
+  Printf.printf "# %d\n%!" d;
+;;
+</pre>
+
+<p>with <code>cx</code> eq <code>75</code></p>
+<pre># 1</pre>
+
+<p>with <code>cx</code> eq <code>-5</code></p>
+<pre># -1</pre>
+
+<p>with <code>cx</code> eq <code>50</code></p>
+<pre># 0</pre>
+
+<p><a href="./tut-xmgk-81.html">&lt;-</a> /
+<a href="./tut-xmgk-toc.html">-&gt;</a></p>
+<!--
+<a href="./tut-xmgk-82.html">-&gt;</a></p>
+-->
+
+</body>
+</html>
