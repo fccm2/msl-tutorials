@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>interval-mapping - ocaml</title>
+<meta name="keywords" content="interval-mapping, ocaml" />
+<meta name="description" content="How to map a value, from an interval, to another one." />
+<meta name="auhtor" content="Florent Monnier, 2025" />
+<meta name="license" content="fdl, cc-by-sa_2.5 OR later, spdx:any" />
+<style>
+pre { border:1px solid #000; padding-left:1px; margin-right:28%; }
+</style>
+</head>
+<body>
+<h1>Interval Mapping - ocaml</h1>
+<h2>How to map a value, from an interval, to another one</h2>
+<pre>let ab = (10, 100)
+let cd = (20, 2000)
+let e = (12)
+
+let interv_map ab cd (e) =
+  let a, b = (ab) in
+  let c, d = (cd) in
+  let ab_diff = (b - a) in
+  let cd_diff = (d - c) in
+  let f = (e - a) in
+  ((f * cd_diff) / ab_diff) + c
+
+let () =
+  let r = interv_map ab cd (e) in
+  Printf.printf "intervl map: %d\n" r;
+;;</pre>
+<p>Get the result with:</p>
+<pre>$ \ocaml interv.ml</pre>
+<p>Result:</p>
+<pre>intervl map: 64</pre>
+<p><a href="./tut-right.html">&lt;-</a> /
+<a href="./tut-xmgk-toc.html">-&gt;</a></p>
+</body>
+</html>
