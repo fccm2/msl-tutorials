@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>/tmp/.WIP/msl-tutorials/tut/cubherm.ml.html</title>
+<meta name="Generator" content="Vim/9.1">
+<meta name="plugin-version" content="vim9.0_v2">
+<meta name="syntax" content="ocaml">
+<meta name="settings" content="use_css,no_foldcolumn,expand_tabs,pre_wrap,prevent_copy=,use_input_for_pc=none">
+<meta name="colorscheme" content="none">
+<style>
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+a { color: inherit; }
+.Statement { color: #af5f00; }
+.PreProc { color: #c000c0; }
+.Identifier { color: #008080; }
+.Constant { color: #c00000; }
+.Type { color: #008000; }
+-->
+</style>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="Statement">type</span> point2d <span class="Statement">=</span> <span class="Type">float</span> <span class="Statement">*</span> <span class="Type">float</span>
+
+<span class="Statement">module</span><span class="PreProc"> Vector2d</span> <span class="Statement">=</span> <span class="PreProc">struct</span>
+
+<span class="Statement">type</span> t <span class="Statement">=</span> <span class="Type">float</span> <span class="Statement">*</span> <span class="Type">float</span>
+
+<span class="Statement">let</span> add <span class="Statement">(</span>ax, ay<span class="Statement">)</span> <span class="Statement">(</span>bx, by<span class="Statement">)</span> <span class="Statement">=</span> <span class="Statement">(</span>ax +. bx, ay +. by<span class="Statement">)</span>
+<span class="Statement">let</span> sub <span class="Statement">(</span>ax, ay<span class="Statement">)</span> <span class="Statement">(</span>bx, by<span class="Statement">)</span> <span class="Statement">=</span> <span class="Statement">(</span>ax -. bx, ay -. by<span class="Statement">)</span>
+<span class="Statement">let</span> mul <span class="Statement">(</span>x, y<span class="Statement">)</span> k <span class="Statement">=</span> <span class="Statement">(</span>x *. k, y *. k<span class="Statement">)</span>
+<span class="Statement">let</span> div <span class="Statement">(</span>x, y<span class="Statement">)</span> k <span class="Statement">=</span> <span class="Statement">(</span>x /. k, y /. k<span class="Statement">)</span>
+
+<span class="Statement">module</span><span class="PreProc"> Infix</span> <span class="Statement">=</span> <span class="PreProc">struct</span>
+  <span class="Statement">let</span> <span class="Statement">(</span> + <span class="Statement">)</span> <span class="Statement">=</span> add <span class="Statement">;;</span>
+  <span class="Statement">let</span> <span class="Statement">(</span> - <span class="Statement">)</span> <span class="Statement">=</span> sub <span class="Statement">;;</span>
+  <span class="Statement">let</span> <span class="Statement">(</span> * <span class="Statement">)</span> <span class="Statement">=</span> mul <span class="Statement">;;</span>
+  <span class="Statement">let</span> <span class="Statement">(</span> / <span class="Statement">)</span> <span class="Statement">=</span> div <span class="Statement">;;</span>
+<span class="PreProc">end</span>
+<span class="PreProc">end</span>
+
+
+<span class="Statement">module</span><span class="PreProc"> CubicHermiteSpline</span> <span class="Statement">=</span> <span class="PreProc">struct</span>
+
+<span class="Statement">let</span> m c p_pred p_succ <span class="Statement">=</span>
+  <span class="PreProc">Vector2d</span>.<span class="PreProc">Infix</span>.<span class="Statement">(</span>
+    <span class="Statement">((</span>p_succ - p_pred<span class="Statement">)</span> / <span class="Constant">2.0</span><span class="Statement">)</span> * <span class="Statement">(</span><span class="Constant">1.0</span> -. c<span class="Statement">)</span>
+  <span class="Statement">)</span>
+
+<span class="Statement">let</span> pnt c <span class="Identifier">~p_pred</span> <span class="Identifier">~p0</span> <span class="Identifier">~p1</span> <span class="Identifier">~p_succ</span> <span class="Statement">=</span>
+  <span class="Statement">let</span> m0 <span class="Statement">=</span> m c p_pred p1
+  <span class="Statement">and</span> m1 <span class="Statement">=</span> m c p0 p_succ <span class="Statement">in</span>
+  <span class="Statement">function</span> t <span class="Statement">-&gt;</span>
+    <span class="Statement">let</span> t3 <span class="Statement">=</span> t ** <span class="Constant">3.0</span>
+    <span class="Statement">and</span> t2 <span class="Statement">=</span> t ** <span class="Constant">2.0</span> <span class="Statement">in</span>
+    <span class="Statement">let</span> two_t3 <span class="Statement">=</span> <span class="Constant">2.0</span> *. t3
+    <span class="Statement">and</span> two_t2 <span class="Statement">=</span> <span class="Constant">2.0</span> *. t2
+    <span class="Statement">and</span> three_t2 <span class="Statement">=</span> <span class="Constant">3.0</span> *. t2
+    <span class="Statement">in</span>
+    <span class="Statement">let</span> h00 <span class="Statement">=</span> two_t3 -. three_t2 +. <span class="Constant">1.0</span>
+    <span class="Statement">and</span> h10 <span class="Statement">=</span> t3 -. two_t2 +. t
+    <span class="Statement">and</span> h01 <span class="Statement">=</span> -. two_t3 +. three_t2
+    <span class="Statement">and</span> h11 <span class="Statement">=</span> t3 -. t2
+    <span class="Statement">in</span>
+    <span class="PreProc">Vector2d</span>.<span class="PreProc">Infix</span>.<span class="Statement">(</span>
+      <span class="Statement">(</span>p0 * h00<span class="Statement">)</span> + <span class="Statement">(</span>m0 * h10<span class="Statement">)</span> + <span class="Statement">(</span>p1 * h01<span class="Statement">)</span> + <span class="Statement">(</span>m1 * h11<span class="Statement">)</span>
+    <span class="Statement">)</span>
+
+<span class="PreProc">end</span>
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

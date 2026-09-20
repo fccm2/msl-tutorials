@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>/tmp/.WIP/msl-tutorials/tut/cub_herm_spline.ml.html</title>
+<meta name="Generator" content="Vim/9.1">
+<meta name="plugin-version" content="vim9.0_v2">
+<meta name="syntax" content="ocaml">
+<meta name="settings" content="use_css,no_foldcolumn,expand_tabs,pre_wrap,prevent_copy=,use_input_for_pc=none">
+<meta name="colorscheme" content="none">
+<style>
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+a { color: inherit; }
+.Statement { color: #af5f00; }
+.PreProc { color: #c000c0; }
+.Constant { color: #c00000; }
+.Comment { color: #0000c0; }
+.Identifier { color: #008080; }
+-->
+</style>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="Statement">module</span><span class="PreProc"> CbHrmSpln</span> <span class="Statement">=</span> <span class="PreProc">Cubherm.CubicHermiteSpline</span>
+
+<span class="Statement">let</span> plot <span class="Statement">(</span>x, y<span class="Statement">)</span> <span class="Statement">=</span>
+  <span class="Statement">let</span> x <span class="Statement">=</span> int_of_float x <span class="Statement">in</span>
+  <span class="Statement">let</span> y <span class="Statement">=</span> int_of_float y <span class="Statement">in</span>
+  <span class="PreProc">Printf</span>.printf <span class="Constant">&quot;&lt;draw_circle c='%d,%d' r='1' rgb='90,90,255' /&gt;\n&quot;</span> x y
+
+<span class="Statement">let</span> circ r <span class="Statement">(</span>x, y<span class="Statement">)</span> <span class="Statement">=</span>
+  <span class="Statement">let</span> x <span class="Statement">=</span> int_of_float x <span class="Statement">in</span>
+  <span class="Statement">let</span> y <span class="Statement">=</span> int_of_float y <span class="Statement">in</span>
+  <span class="PreProc">Printf</span>.printf <span class="Constant">&quot;&lt;draw_circle c='%d,%d' r='%d' rgb='110,110,255' /&gt;\n&quot;</span> x y r
+
+
+<span class="Statement">let</span> line <span class="Statement">(</span>x1, y1<span class="Statement">)</span> <span class="Statement">(</span>x2, y2<span class="Statement">)</span> <span class="Statement">=</span>
+  <span class="Statement">let</span> x1 <span class="Statement">=</span> int_of_float x1 <span class="Statement">in</span>
+  <span class="Statement">let</span> y1 <span class="Statement">=</span> int_of_float y1 <span class="Statement">in</span>
+  <span class="Statement">let</span> y2 <span class="Statement">=</span> int_of_float y2 <span class="Statement">in</span>
+  <span class="Statement">let</span> x2 <span class="Statement">=</span> int_of_float x2 <span class="Statement">in</span>
+  <span class="PreProc">Printf</span>.printf <span class="Constant">&quot;&lt;path coord='relative' rgb='210,210,255'&gt;\n&quot;</span> <span class="Statement">;</span>
+  <span class="PreProc">Printf</span>.printf <span class="Constant">&quot;  &lt;move_to p='%d,%d' /&gt;\n&quot;</span> x1 y1<span class="Statement">;</span>
+  <span class="PreProc">Printf</span>.printf <span class="Constant">&quot;  &lt;line_to p='%d,%d' /&gt;\n&quot;</span> x2 y2<span class="Statement">;</span>
+  <span class="Comment">(* Printf.printf &quot;  &lt;close_path /&gt;\n&quot; ; *)</span>
+  <span class="PreProc">Printf</span>.printf <span class="Constant">&quot;&lt;/path&gt;\n&quot;</span> <span class="Statement">;</span>
+<span class="Statement">;;</span>
+
+<span class="Statement">let</span> <span class="Statement">rec</span> drop_last <span class="Statement">=</span> <span class="Statement">function</span>
+  <span class="Statement">|</span> <span class="Statement">[</span><span class="Statement">_</span><span class="Statement">]</span> <span class="Statement">|</span> <span class="Constant">[]</span> <span class="Statement">-&gt;</span> <span class="Constant">[]</span>
+  <span class="Statement">|</span> x::xs <span class="Statement">-&gt;</span> x :: drop_last xs
+
+<span class="Statement">let</span> point2d_rand <span class="Statement">(</span>x1, y1<span class="Statement">)</span> <span class="Statement">(</span>x2, y2<span class="Statement">)</span> <span class="Statement">=</span>
+  <span class="Statement">let</span> x <span class="Statement">=</span> x1 +. <span class="PreProc">Random</span>.float <span class="Statement">(</span>x2 -. x1<span class="Statement">)</span>
+  <span class="Statement">and</span> y <span class="Statement">=</span> y1 +. <span class="PreProc">Random</span>.float <span class="Statement">(</span>y2 -. y1<span class="Statement">)</span> <span class="Statement">in</span> <span class="Statement">(</span>x, y<span class="Statement">)</span>
+
+<span class="Statement">let</span> m <span class="Constant">()</span> <span class="Statement">=</span>
+
+  <span class="PreProc">Printf</span>.printf <span class="Constant">&quot;&lt;layer&gt;\n&quot;</span><span class="Statement">;</span>
+  <span class="PreProc">Printf</span>.printf <span class="Constant">&quot;&lt;new w='%d' h='%d' rgb='210,210,255' /&gt;\n&quot;</span> <span class="Constant">600</span> <span class="Constant">400</span><span class="Statement">;</span>
+  <span class="PreProc">Printf</span>.printf <span class="Constant">&quot;&lt;/layer&gt;\n&quot;</span><span class="Statement">;</span>
+  <span class="Comment">(*</span>
+<span class="Comment">  let p1 = (20., 40.) in</span>
+<span class="Comment">  let p2 = (80., 40.) in</span>
+<span class="Comment">  let p3 = (140., 280.) in</span>
+<span class="Comment">  let p4 = (240., 140.) in</span>
+<span class="Comment">  let p5 = (280., 240.) in</span>
+<span class="Comment">  let p6 = (380., 240.) in</span>
+<span class="Comment">  let ps = ref [p1; p2; p3; p4; p5; p6] in</span>
+<span class="Comment">  *)</span>
+  <span class="PreProc">Random</span>.self_init <span class="Constant">()</span><span class="Statement">;</span>
+  <span class="Statement">let</span> p1 <span class="Statement">=</span> point2d_rand <span class="Statement">(</span><span class="Constant">20</span>., <span class="Constant">20</span>.<span class="Statement">)</span> <span class="Statement">(</span><span class="Constant">580</span>., <span class="Constant">380</span>.<span class="Statement">)</span> <span class="Statement">in</span>
+  <span class="Statement">let</span> p2 <span class="Statement">=</span> point2d_rand <span class="Statement">(</span><span class="Constant">20</span>., <span class="Constant">20</span>.<span class="Statement">)</span> <span class="Statement">(</span><span class="Constant">580</span>., <span class="Constant">380</span>.<span class="Statement">)</span> <span class="Statement">in</span>
+  <span class="Statement">let</span> p3 <span class="Statement">=</span> point2d_rand <span class="Statement">(</span><span class="Constant">20</span>., <span class="Constant">20</span>.<span class="Statement">)</span> <span class="Statement">(</span><span class="Constant">580</span>., <span class="Constant">380</span>.<span class="Statement">)</span> <span class="Statement">in</span>
+  <span class="Statement">let</span> p4 <span class="Statement">=</span> point2d_rand <span class="Statement">(</span><span class="Constant">20</span>., <span class="Constant">20</span>.<span class="Statement">)</span> <span class="Statement">(</span><span class="Constant">580</span>., <span class="Constant">380</span>.<span class="Statement">)</span> <span class="Statement">in</span>
+  <span class="Statement">let</span> p5 <span class="Statement">=</span> point2d_rand <span class="Statement">(</span><span class="Constant">20</span>., <span class="Constant">20</span>.<span class="Statement">)</span> <span class="Statement">(</span><span class="Constant">580</span>., <span class="Constant">380</span>.<span class="Statement">)</span> <span class="Statement">in</span>
+  <span class="Statement">let</span> p6 <span class="Statement">=</span> point2d_rand <span class="Statement">(</span><span class="Constant">20</span>., <span class="Constant">20</span>.<span class="Statement">)</span> <span class="Statement">(</span><span class="Constant">580</span>., <span class="Constant">380</span>.<span class="Statement">)</span> <span class="Statement">in</span>
+  <span class="Statement">let</span> p7 <span class="Statement">=</span> point2d_rand <span class="Statement">(</span><span class="Constant">20</span>., <span class="Constant">20</span>.<span class="Statement">)</span> <span class="Statement">(</span><span class="Constant">580</span>., <span class="Constant">380</span>.<span class="Statement">)</span> <span class="Statement">in</span>
+  <span class="Statement">let</span> ps <span class="Statement">=</span> ref <span class="Statement">[</span>p1<span class="Statement">;</span> p2<span class="Statement">;</span> p3<span class="Statement">;</span> p4<span class="Statement">;</span> p5<span class="Statement">;</span> p6<span class="Statement">;</span> p7<span class="Statement">]</span> <span class="Statement">in</span>
+
+  <span class="Statement">let</span> <span class="Statement">rec</span> aux f <span class="Statement">=</span> <span class="Statement">function</span>
+    <span class="Statement">|</span> p1::<span class="Statement">((</span>p2::p3::p4::<span class="Statement">_</span><span class="Statement">)</span> <span class="Statement">as</span> tail<span class="Statement">)</span> <span class="Statement">-&gt;</span> f p1 p2 p3 p4<span class="Statement">;</span> aux f tail
+    <span class="Statement">|</span> <span class="Statement">_</span> <span class="Statement">-&gt;</span> <span class="Constant">()</span>
+  <span class="Statement">in</span>
+  <span class="Statement">let</span> n <span class="Statement">=</span> <span class="Constant">60</span> <span class="Statement">in</span>
+  <span class="Statement">for</span> j <span class="Statement">=</span> <span class="Constant">0</span> <span class="Statement">to</span> pred <span class="Constant">10</span> <span class="Statement">do</span>
+    <span class="PreProc">Printf</span>.printf <span class="Constant">&quot;&lt;!-- loop %d --&gt;\n&quot;</span> j<span class="Statement">;</span>
+
+    <span class="PreProc">Printf</span>.printf <span class="Constant">&quot;&lt;layer compose='multiply'&gt;\n&quot;</span> <span class="Statement">;</span>
+    <span class="PreProc">Printf</span>.printf <span class="Constant">&quot;&lt;new w='%d' h='%d' rgb='255,255,255' /&gt;\n&quot;</span> <span class="Constant">600</span> <span class="Constant">400</span><span class="Statement">;</span>
+
+    <span class="PreProc">List</span>.iter <span class="Statement">(</span>circ <span class="Constant">3</span><span class="Statement">)</span> !ps<span class="Statement">;</span>
+    aux <span class="Statement">(</span><span class="Statement">fun</span> p1 p2 p3 p4 <span class="Statement">-&gt;</span>
+      line p1 p2<span class="Statement">;</span>
+      line p3 p4<span class="Statement">;</span>
+    <span class="Statement">)</span> !ps<span class="Statement">;</span>
+    <span class="Statement">for</span> i <span class="Statement">=</span> <span class="Constant">0</span> <span class="Statement">to</span> n <span class="Statement">do</span>
+      <span class="Statement">let</span> t <span class="Statement">=</span> float i /. float n <span class="Statement">in</span>
+      aux <span class="Statement">(</span><span class="Statement">fun</span> p1 p2 p3 p4 <span class="Statement">-&gt;</span>
+        <span class="Statement">let</span> p <span class="Statement">=</span>
+          <span class="PreProc">CbHrmSpln</span>.pnt <span class="Constant">0.0</span>
+            <span class="Identifier">~p_pred:</span>p1 <span class="Identifier">~p0:</span>p2
+            <span class="Identifier">~p_succ:</span>p4 <span class="Identifier">~p1:</span>p3
+            t
+        <span class="Statement">in</span>
+        plot p<span class="Statement">;</span>
+      <span class="Statement">)</span> !ps<span class="Statement">;</span>
+    <span class="Statement">done</span><span class="Statement">;</span>
+    <span class="Statement">let</span> p <span class="Statement">=</span> point2d_rand <span class="Statement">(</span><span class="Constant">20</span>., <span class="Constant">20</span>.<span class="Statement">)</span> <span class="Statement">(</span><span class="Constant">580</span>., <span class="Constant">380</span>.<span class="Statement">)</span> <span class="Statement">in</span>
+    ps <span class="Statement">:=</span> p :: <span class="Statement">(</span>drop_last !ps<span class="Statement">)</span><span class="Statement">;</span>
+    <span class="PreProc">Printf</span>.printf <span class="Constant">&quot;&lt;/layer&gt;\n&quot;</span> <span class="Statement">;</span>
+    <span class="PreProc">Printf</span>.printf <span class="Constant">&quot;\n&quot;</span><span class="Statement">;</span>
+  <span class="Statement">done</span>
+
+<span class="Statement">let</span> <span class="Constant">()</span> <span class="Statement">=</span>
+  <span class="PreProc">Printf</span>.printf <span class="Constant">&quot;&lt;msl&gt;\n&quot;</span><span class="Statement">;</span>
+  <span class="PreProc">Printf</span>.printf <span class="Constant">&quot;&lt;image&gt;\n&quot;</span><span class="Statement">;</span>
+  <span class="PreProc">Printf</span>.printf <span class="Constant">&quot;&lt;merge&gt;\n&quot;</span><span class="Statement">;</span>
+  m <span class="Constant">()</span> <span class="Statement">;</span>
+  <span class="PreProc">Printf</span>.printf <span class="Constant">&quot;&lt;/merge&gt;\n&quot;</span><span class="Statement">;</span>
+  <span class="PreProc">Printf</span>.printf <span class="Constant">&quot;&lt;/image&gt;\n&quot;</span><span class="Statement">;</span>
+  <span class="PreProc">Printf</span>.printf <span class="Constant">&quot;&lt;display /&gt;\n&quot;</span><span class="Statement">;</span>
+  <span class="PreProc">Printf</span>.printf <span class="Constant">&quot;&lt;/msl&gt;\n&quot;</span><span class="Statement">;</span>
+<span class="Statement">;;</span>
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->
