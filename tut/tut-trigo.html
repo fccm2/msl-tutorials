@@ -1,0 +1,120 @@
+<html>
+<head>
+<title>tut - trigo</title>
+<style>
+pre { border:1px solid #000; }
+</style>
+</head>
+<body>
+
+<h1>trigonometry</h1>
+
+<pre>
+$ ocaml
+
+# acos;;
+- : float -&gt; float = &lt;fun&gt;
+# asin;;
+- : float -&gt; float = &lt;fun&gt;
+# atan;;
+- : float -&gt; float = &lt;fun&gt;
+# 
+</pre>
+
+<pre>
+$ ocaml
+# let pi = Float.pi ;;
+val pi : float = 3.14159265358979312
+#
+</pre>
+
+<pre>
+# let a180_2 = (pi *. 2.0) ;;
+val a180_2 : float = 6.28318530717958623
+</pre>
+
+<p></p>
+
+<pre>
+$ ocaml
+
+# let pi = Float.pi ;;
+val pi : float = 3.14159265358979312
+
+# let a180_2 = (pi *. 2.0) ;;
+val a180_2 : float = 6.28318530717958623
+
+# let a180 = (pi *. 1.0) ;;
+val a180 : float = 3.14159265358979312
+
+# let a30 = (a180 /. 3.0) ;;
+val a30 : float = 1.04719755119659763
+</pre>
+
+
+<pre>
+# let a30 = (a180 /. 3.0) ;;
+val a30 : float = 1.04719755119659763
+
+# let x, y = (cos a30, sin a30) ;;
+val x : float = 0.500000000000000111
+val y : float = 0.866025403784438597
+</pre>
+
+
+<pre>
+# let px, py = x *. 10.0, y *. 10.0 ;;
+val px : float = 5.00000000000000089
+val py : float = 8.66025403784438552
+</pre>
+
+
+<pre>
+# let r = (10.0);;
+val r : float = 10.
+</pre>
+
+
+<pre>
+# atan (py /. px);;
+- : float = 1.04719755119659763
+</pre>
+
+
+<pre>
+# acos (px /. 10.0);;
+- : float = 1.04719755119659763
+</pre>
+
+
+<pre>
+# asin (py /. 10.0);;
+- : float = 1.04719755119659763
+</pre>
+
+
+<pre>
+# tan a30;;
+- : float = 1.73205080756887675
+# (py /. px);;
+- : float = 1.73205080756887675
+</pre>
+
+
+<pre>
+# atan2;;
+- : float -&gt; float -&gt; float = &lt;fun&gt;
+
+# atan2 py px;;
+- : float = 1.04719755119659763
+
+# 2.0 *. (atan (y /. (sqrt (px *. px +. py *. py) +. px))) ;;
+- : float = 0.115342009768851853
+</pre>
+
+
+<p><a href="./tut-interv.html">&lt;-</a> /
+<a href="./tut-xmgk-toc.html">-&gt;</a></p>
+
+</body>
+</html>
